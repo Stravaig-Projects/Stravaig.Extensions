@@ -22,11 +22,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__Documentation", "__Docume
 		..\release-notes\wip-release-notes.md = ..\release-notes\wip-release-notes.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core", "Stravaig.Extensions.Core\Stravaig.Extensions.Core.csproj", "{0C33F3EA-C826-4F31-9050-17393D3DDE67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Tests", "Stravaig.Extensions.Core.Tests\Stravaig.Extensions.Core.Tests.csproj", "{85D106B4-A319-442E-B94C-160A3D5F6577}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {064958BE-42C5-4268-8132-49EF6D009D99}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 	EndGlobalSection
 EndGlobal
