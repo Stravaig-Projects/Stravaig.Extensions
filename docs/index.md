@@ -1,5 +1,5 @@
-# Stravaig.Extensions.Core documentation
+# Documentation
 
-# By version
+## By version
 
 * [v0.1](v0.1/index.md)

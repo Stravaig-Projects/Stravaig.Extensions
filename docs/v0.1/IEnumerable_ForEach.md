@@ -2,7 +2,8 @@
 
 An extension method to look over a sequence of elements and perform an action on each element.
 
-## `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
+---
+### `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
 
 * `aSequence` is an `IEnumerable<T>`
 * `e` is an individual element in the sequence of type `T`
@@ -12,7 +13,7 @@ aSequence.ForEach((e) => {
 });
 ```
 
-## `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
+### `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
 
 * `aSequence` is an `IEnumerable<T>`
 * `e` is an individual element in the sequence of type `T`
@@ -23,7 +24,7 @@ aSequence.ForEach((e,i) => {
 });
 ```
 
-## `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, Task> action)`
+### `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, Task> action)`
 
 * `aSequence` is an `IEnumerable<T>`
 * `e` is an individual element in the sequence of type `T`
@@ -34,7 +35,7 @@ await aSequence.ForEachAsync(async (e) => {
 });
 ```
 
-## `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, int, Task> action)`
+### `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, int, Task> action)`
 
 * `aSequence` is an `IEnumerable<T>`
 * `e` is an individual element in the sequence of type `T`
