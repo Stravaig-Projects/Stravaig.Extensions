@@ -6,6 +6,9 @@
 docs/build/
 docs/source/_build
 
+# Mac files
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo

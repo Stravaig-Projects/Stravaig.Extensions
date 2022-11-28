@@ -3,3 +3,10 @@
 ## IEnumerable extensions
 
 * [ForEach](IEnumerable_ForEach.md)
+* [ForEachAsync](IEnumerable_ForEachAsync.md)
+* [IsEmpty](IEnumerable_IsEmpty.md)
+* [IsNullOrEmpty](IEnumerable_IsNullOrEmpty.md)
+
+## String Extensions
+
+* [HasContent](String_HasContent.md)
