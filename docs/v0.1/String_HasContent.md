@@ -5,7 +5,7 @@ An extension method to determine if a string has content, or is null, empty or c
 ---
 ## `bool HasContent(this string target)`
 
-### Paramters
+### Parameters
 
 * `target`: The target string to test.
 

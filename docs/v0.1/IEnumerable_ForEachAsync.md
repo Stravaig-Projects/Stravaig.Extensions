@@ -6,7 +6,7 @@ An extension method to look over a sequence of elements and perform an async act
 
 ### `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, int, Task> action)`
 
-### Paramters
+### Parameters
 
 * `sequence`: Extends the `IEnumerable<T>` interface.
 * `action`: An async action to perform on each element in the `sequence`. It takes two parameters and returns a `Task`
@@ -22,7 +22,7 @@ await aSequence.ForEachAsync(async (e,i) => {
 
 ## `async Task ForEachAsync<T>(this IEnumerable<T> sequence, Func<T, Task> action)`
 
-### Paramters
+### Parameters
 
 * `sequence`: Extends the `IEnumerable<T>` interface.
 * `action`: An action to perform on each element in the `sequence`. It takes two parameters

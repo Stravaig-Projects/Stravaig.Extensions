@@ -5,7 +5,7 @@ An extension method to look over a sequence of elements and perform an action on
 ---
 ## `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
 
-### Paramters
+### Parameters
 
 * `sequence`: Extends the `IEnumerable<T>` interface.
 * `action`: An action to perform on each element in the `sequence`. It takes two parameters
@@ -21,7 +21,7 @@ aSequence.ForEach((e) => {
 ```
 
 ## `void ForEach<T>(this IEnumerable<T> sequence, Action<T, int> action)`
-### Paramters
+### Parameters
 
 * `sequence`: Extends the `IEnumerable<T>` interface.
 * `action`: An action to perform on each element in the `sequence`. It takes a single parameter

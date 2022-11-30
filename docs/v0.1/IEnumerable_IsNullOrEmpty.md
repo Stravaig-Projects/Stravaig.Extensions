@@ -5,7 +5,7 @@ An extension method to look over a sequence of elements and work out whether it 
 ---
 ## `bool IsNullOrEmpty<T>(this IEnumerable<T> source)`
 
-### Paramters
+### Parameters
 
 * `source`: Extends the `IEnumerable<T>` interface.
 
