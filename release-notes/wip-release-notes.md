@@ -4,13 +4,9 @@
 
 Date: ???
 
-### Bugs
-
 ### Features
 
-### Miscellaneous
-
-### Dependabot
+- #31: Added ToDictionary extension methods
 
 
 
