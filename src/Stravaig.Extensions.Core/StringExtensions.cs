@@ -13,7 +13,7 @@ public static class StringExtensions
     /// <param name="target">The string to test</param>
     /// <returns>True if the string has content, false if the string is null, empty or consists only of whitespace.</returns>
     [Pure]
-    public static bool HasContent(this string target)
+    public static bool HasContent(this string? target)
     {
         return !string.IsNullOrWhiteSpace(target);
     }
