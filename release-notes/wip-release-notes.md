@@ -6,7 +6,10 @@ Date: ???
 
 ### Features
 
-- #31: Added ToDictionary extension methods
+- Added `HasContent` string extension methods.
+- Added `ForEach` and `ForEachAsync` extension methods.
+- #2: Added `IsEmpty` and `IsNullOrEmpty` extension methods.
+- #31: Added `ToDictionary` extension methods.
 
 
 
