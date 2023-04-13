@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using NUnit.Framework;
-using Shouldly;
 
 namespace Stravaig.Extensions.Core.Tests;
 

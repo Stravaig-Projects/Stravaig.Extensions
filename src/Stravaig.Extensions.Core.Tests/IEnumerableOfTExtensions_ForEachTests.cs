@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NUnit.Framework;
-using Shouldly;
 
 namespace Stravaig.Extensions.Core.Tests;
 
@@ -26,10 +24,10 @@ public class IEnumerableOfTExtensions_ForEachTests
     [Test]
     public void ForEach_SequenceParameterNullCheck()
     {
-        string[] sequence = null;
+        string[]? sequence = null;
         Should.Throw<ArgumentNullException>(() =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            sequence.ForEach(s => throw new InvalidOperationException("Should not reach here!")));
+            sequence!.ForEach(_ => throw new InvalidOperationException("Should not reach here!")));
     }
 
     [Test]
@@ -58,7 +56,7 @@ public class IEnumerableOfTExtensions_ForEachTests
         string[]? sequence = null;
         Should.Throw<ArgumentNullException>(() =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            sequence!.ForEach((s,i) => throw new InvalidOperationException("Should not reach here!")));
+            sequence!.ForEach((_,_) => throw new InvalidOperationException("Should not reach here!")));
     }
 
     [Test]
@@ -92,7 +90,7 @@ public class IEnumerableOfTExtensions_ForEachTests
         string[]? sequence = null;
         await Should.ThrowAsync<ArgumentNullException>(async () =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            await sequence!.ForEachAsync(async s =>
+            await sequence!.ForEachAsync(async _ =>
             {
                 await Task.CompletedTask;
                 throw new InvalidOperationException("Should not reach here!");
@@ -129,7 +127,7 @@ public class IEnumerableOfTExtensions_ForEachTests
         string[]? sequence = null;
         await Should.ThrowAsync<ArgumentNullException>(async () =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            await sequence!.ForEachAsync(async (s,i) =>
+            await sequence!.ForEachAsync(async (_,_) =>
             {
                 await Task.CompletedTask;
                 throw new InvalidOperationException("Should not reach here!");

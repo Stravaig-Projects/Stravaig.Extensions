@@ -1,6 +1,4 @@
 using System;
-using NUnit.Framework;
-using Shouldly;
 
 namespace Stravaig.Extensions.Core.Tests;
 
