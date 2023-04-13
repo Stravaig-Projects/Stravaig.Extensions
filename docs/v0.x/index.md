@@ -15,5 +15,6 @@
 
 * [HasContent](String_HasContent.md)
 * [IsAfter](String_IsAfter.md)
+* [IsAfterOrEqualTo](String_IsAfterOrEqualTo.md)
 * [IsBefore](String_IsBefore.md)
 * [IsBeforeOrEqualTo](String_IsBeforeOrEqualTo.md)

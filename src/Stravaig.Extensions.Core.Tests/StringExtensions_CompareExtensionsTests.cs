@@ -33,6 +33,32 @@ public class StringExtensions_CompareExtensionsTests
         "b".IsAfter("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
     }
     
+    [Test]
+    public void AIsAfterOrEqualToBReturnsFalse()
+    {
+        "A".IsAfterOrEqualTo("B", StringComparison.Ordinal).ShouldBeFalse();
+        "a".IsAfterOrEqualTo("B", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "A".IsAfterOrEqualTo("b", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "a".IsAfterOrEqualTo("b", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+    }
+    
+    [Test]
+    public void AIsAfterOrEqualToAReturnsTrue()
+    {
+        "A".IsAfterOrEqualTo("A", StringComparison.Ordinal).ShouldBeTrue();
+        "a".IsAfterOrEqualTo("A", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "A".IsAfterOrEqualTo("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "a".IsAfterOrEqualTo("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+    }
+    
+    [Test]
+    public void BIsAfterOrEqualToAReturnsTrue()
+    {
+        "B".IsAfterOrEqualTo("A", StringComparison.Ordinal).ShouldBeTrue();
+        "b".IsAfterOrEqualTo("A", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "B".IsAfterOrEqualTo("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "b".IsAfterOrEqualTo("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+    }
     
     [Test]
     public void AIsBeforeBReturnsTrue()
