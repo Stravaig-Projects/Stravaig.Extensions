@@ -10,4 +10,9 @@ Some core extensions that make developing easier.
 
 # Documentation
 
-For the current version, see: https://stravaig-projects.github.io/Stravaig.Extensions.Core/v0.x/
+* [Main Documentation](https://stravaig-projects.github.io/Stravaig.Extensions.Core/)
+* [Current Version](https://stravaig-projects.github.io/Stravaig.Extensions.Core/v0.x/)
+* [Contributors](https://stravaig-projects.github.io/Stravaig.Extensions.Core/contributors.html)
+* [Release Notes](https://stravaig-projects.github.io/Stravaig.Extensions.Core/release-notes/)
+
+

@@ -10,15 +10,6 @@ Date: ???
 
 ### Miscellaneous
 
-### Dependent Packages
-
-- .NET 5.0
-  - No changes
-- .NET Core 3.1
-  - No changes
-- General
-  - No changes
-
----
+- #45: Automatically update the metadata in the documentation on a release.
 
 
