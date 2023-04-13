@@ -8,9 +8,11 @@ using Shouldly;
 namespace Stravaig.Extensions.Core.Tests;
 
 [TestFixture]
+// ReSharper disable once InconsistentNaming
 public class IEnumerableOfKeyValuePairExtensions_ToDictionaryTests
 {
-    private KeyValuePair<string, object>[] StandardSet1 = new KeyValuePair<string, object>[]
+    private readonly KeyValuePair<string, object>[]? _nullSet = null;
+    private readonly KeyValuePair<string, object>[] _standardSet1 = 
     {
         new("a", 1),
         new("b", true),
@@ -20,7 +22,7 @@ public class IEnumerableOfKeyValuePairExtensions_ToDictionaryTests
     [Test]
     public void ParameterlessOverloadCreatesDictionary()
     {
-        var dictionary = StandardSet1.ToDictionary();
+        var dictionary = _standardSet1.ToDictionary();
         
         dictionary["a"].ShouldBe(1);
         dictionary["b"].ShouldBe(true);
@@ -32,12 +34,24 @@ public class IEnumerableOfKeyValuePairExtensions_ToDictionaryTests
     [Test]
     public void EqualityComparerOverloadCreatesDictionaryWithComparer()
     {
-        var dictionary = StandardSet1.ToDictionary(StringComparer.OrdinalIgnoreCase);
+        var dictionary = _standardSet1.ToDictionary(StringComparer.OrdinalIgnoreCase);
         
         dictionary["A"].ShouldBe(1);
         dictionary["b"].ShouldBe(true);
         dictionary["C"].ShouldBe(123.45M);
 
         dictionary.ShouldBeOfType<Dictionary<string, object>>();
+    }
+
+    [Test]
+    public void NullKvpThrowsException()
+    {
+        Should.Throw<ArgumentNullException>(() => _nullSet!.ToDictionary());
+    }
+
+    [Test]
+    public void NullComparerThrowsException()
+    {
+        Should.Throw<ArgumentNullException>(() => _standardSet1.ToDictionary(null!));
     }
 }

@@ -5,6 +5,7 @@ using Shouldly;
 namespace Stravaig.Extensions.Core.Tests;
 
 [TestFixture]
+// ReSharper disable once InconsistentNaming
 public class IEnumerableOfTExtensions_IsEmptyTests
 {
     [Test]
@@ -23,7 +24,7 @@ public class IEnumerableOfTExtensions_IsEmptyTests
     public void IsEmpty_OnNull_ThrowsException()
     {
         Should.Throw<ArgumentNullException>(() =>
-            ((string[]) null).IsEmpty());
+            ((string[]) null!).IsEmpty());
     }
 
     [Test]
@@ -41,6 +42,7 @@ public class IEnumerableOfTExtensions_IsEmptyTests
     [Test]
     public void IsNullOrEmpty_OnNull_ReturnsTrue()
     {
-        ((string[])null).IsNullOrEmpty().ShouldBeTrue();
+        string[]? array = null;
+        array.IsNullOrEmpty().ShouldBeTrue();
     }
 }

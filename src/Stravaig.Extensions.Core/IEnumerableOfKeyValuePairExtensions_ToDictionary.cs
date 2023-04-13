@@ -1,9 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace Stravaig.Extensions.Core;
 
+// Named after the interface + Method
+// ReSharper disable once InconsistentNaming
+/// <summary>
+/// Extensions to IEnumerable&lt;KeyValuePair&lt;TKey, TValue>> so that the
+/// common value factories for the Key and Value don't have to be manually
+/// specified.
+/// </summary>
 public static class IEnumerableOfKeyValuePairExtensions_ToDictionary
 {
     /// <summary>
@@ -16,6 +24,8 @@ public static class IEnumerableOfKeyValuePairExtensions_ToDictionary
     [Pure]
     public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> keyValuePairs)
     {
+        if (keyValuePairs == null) throw new ArgumentNullException(nameof(keyValuePairs));
+
         return keyValuePairs.ToDictionary(
             static kvp => kvp.Key,
             static kvp => kvp.Value);
@@ -32,6 +42,9 @@ public static class IEnumerableOfKeyValuePairExtensions_ToDictionary
     [Pure]
     public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> enumerable, IEqualityComparer<TKey> comparer)
     {
+        if (enumerable == null) throw new ArgumentNullException(nameof(enumerable));
+        if (comparer == null) throw new ArgumentNullException(nameof(comparer));
+        
         return enumerable.ToDictionary(
             static kvp => kvp.Key,
             static kvp => kvp.Value,

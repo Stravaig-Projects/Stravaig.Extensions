@@ -37,7 +37,7 @@ public class IEnumerableOfTExtensions_ForEachTests
     {
         string[] sequence = Array.Empty<string>();
         Should.Throw<ArgumentNullException>(() =>
-            sequence.ForEach((Action<string>)null));
+            sequence.ForEach((Action<string>)null!));
     }
         
     [Test]
@@ -55,10 +55,10 @@ public class IEnumerableOfTExtensions_ForEachTests
     [Test]
     public void ForEachWithIndex_SequenceParameterNullCheck()
     {
-        string[] sequence = null;
+        string[]? sequence = null;
         Should.Throw<ArgumentNullException>(() =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            sequence.ForEach((s,i) => throw new InvalidOperationException("Should not reach here!")));
+            sequence!.ForEach((s,i) => throw new InvalidOperationException("Should not reach here!")));
     }
 
     [Test]
@@ -66,7 +66,7 @@ public class IEnumerableOfTExtensions_ForEachTests
     {
         string[] sequence = Array.Empty<string>();
         Should.Throw<ArgumentNullException>(() =>
-            sequence.ForEach((Action<string, int>)null));
+            sequence.ForEach((Action<string, int>)null!));
     }
         
     [Test]
@@ -89,10 +89,10 @@ public class IEnumerableOfTExtensions_ForEachTests
     [Test]
     public async Task ForEachAsync_SequenceParameterNullCheck()
     {
-        string[] sequence = null;
+        string[]? sequence = null;
         await Should.ThrowAsync<ArgumentNullException>(async () =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            await sequence.ForEachAsync(async s =>
+            await sequence!.ForEachAsync(async s =>
             {
                 await Task.CompletedTask;
                 throw new InvalidOperationException("Should not reach here!");
@@ -104,7 +104,7 @@ public class IEnumerableOfTExtensions_ForEachTests
     {
         string[] sequence = Array.Empty<string>();
         await Should.ThrowAsync<ArgumentNullException>(async () =>
-            await sequence.ForEachAsync((Func<string, Task>)null));
+            await sequence.ForEachAsync((Func<string, Task>)null!));
     }
         
     [Test]
@@ -126,10 +126,10 @@ public class IEnumerableOfTExtensions_ForEachTests
     [Test]
     public async Task ForEachAsyncWithIndex_SequenceParameterNullCheck()
     {
-        string[] sequence = null;
+        string[]? sequence = null;
         await Should.ThrowAsync<ArgumentNullException>(async () =>
             // ReSharper disable once ExpressionIsAlwaysNull
-            await sequence.ForEachAsync(async (s,i) =>
+            await sequence!.ForEachAsync(async (s,i) =>
             {
                 await Task.CompletedTask;
                 throw new InvalidOperationException("Should not reach here!");
@@ -141,6 +141,6 @@ public class IEnumerableOfTExtensions_ForEachTests
     {
         string[] sequence = Array.Empty<string>();
         await Should.ThrowAsync<ArgumentNullException>(async () =>
-            await sequence.ForEachAsync((Func<string, int, Task>)null));
+            await sequence.ForEachAsync((Func<string, int, Task>)null!));
     }
 }

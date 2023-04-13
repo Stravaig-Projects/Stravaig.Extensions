@@ -32,7 +32,7 @@ public static class IEnumerableOfTExtensions_IsEmpty
     /// <typeparam name="T">The type of object in the source</typeparam>
     /// <returns>A Boolean, true if the source is empty or null, false otherwise.</returns>
     [Pure]
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T>? source)
     {
         return source == null || source.IsEmpty();
     }

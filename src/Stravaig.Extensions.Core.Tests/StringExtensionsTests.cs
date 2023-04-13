@@ -9,7 +9,8 @@ public class StringExtensionsTests
     [Test]
     public void NullHasContentShouldBeFalse()
     {
-        ((string) null).HasContent().ShouldBeFalse();
+        string? nullString = null;
+        nullString.HasContent().ShouldBeFalse();
     }
         
     [Test]
