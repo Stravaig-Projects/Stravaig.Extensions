@@ -14,3 +14,4 @@
 ## String Extensions
 
 * [HasContent](String_HasContent.md)
+* [IsBefore](String_IsBefore.md)
