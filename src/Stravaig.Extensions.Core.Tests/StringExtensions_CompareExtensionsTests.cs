@@ -7,6 +7,34 @@ namespace Stravaig.Extensions.Core.Tests;
 public class StringExtensions_CompareExtensionsTests
 {
     [Test]
+    public void AIsAfterBReturnsFalse()
+    {
+        "A".IsAfter("B", StringComparison.Ordinal).ShouldBeFalse();
+        "a".IsAfter("B", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "A".IsAfter("b", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "a".IsAfter("b", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+    }
+    
+    [Test]
+    public void AIsAfterAReturnsFalse()
+    {
+        "A".IsAfter("A", StringComparison.Ordinal).ShouldBeFalse();
+        "a".IsAfter("A", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "A".IsAfter("a", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+        "a".IsAfter("a", StringComparison.OrdinalIgnoreCase).ShouldBeFalse();
+    }
+    
+    [Test]
+    public void BIsAfterAReturnsTrue()
+    {
+        "B".IsAfter("A", StringComparison.Ordinal).ShouldBeTrue();
+        "b".IsAfter("A", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "B".IsAfter("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+        "b".IsAfter("a", StringComparison.OrdinalIgnoreCase).ShouldBeTrue();
+    }
+    
+    
+    [Test]
     public void AIsBeforeBReturnsTrue()
     {
         "A".IsBefore("B", StringComparison.Ordinal).ShouldBeTrue();

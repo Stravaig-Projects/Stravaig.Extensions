@@ -17,5 +17,4 @@ An extension method to determine if a string comes before another.
 string a = "A";
 string b = "B";
 bool result = a.IsBefore(b, StringComparison.OrdinalIgnoreCase); // true
-});
 ```

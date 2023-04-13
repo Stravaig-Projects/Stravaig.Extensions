@@ -1,9 +1,9 @@
-# string.IsBeforeOrEqualTo(...)
+# string.IsAfter(...)
 
-An extension method to determine if a string comes before or is equal to another.
+An extension method to determine if a string comes after another.
 
 ---
-## `bool IsBeforeOrEqualTo(this string lhs, string rhs, StringComparison comparisonType)`
+## `bool IsAfter(this string lhs, string rhs, StringComparison comparisonType)`
 
 ### Parameters
 
@@ -16,5 +16,5 @@ An extension method to determine if a string comes before or is equal to another
 ```csharp
 string a = "A";
 string b = "B";
-bool result = a.IsBeforeOrEqualTo(b, StringComparison.OrdinalIgnoreCase); // true
+bool result = b.IsAfter(a, StringComparison.OrdinalIgnoreCase); // true
 ```

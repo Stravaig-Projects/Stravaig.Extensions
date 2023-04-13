@@ -14,5 +14,6 @@
 ## String Extensions
 
 * [HasContent](String_HasContent.md)
+* [IsAfter](String_IsAfter.md)
 * [IsBefore](String_IsBefore.md)
 * [IsBeforeOrEqualTo](String_IsBeforeOrEqualTo.md)
