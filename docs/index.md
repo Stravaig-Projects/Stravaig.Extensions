@@ -2,4 +2,4 @@
 
 ## By version
 
-* [v0.1](v0.1/index.md)
+* [v0.x](v0.x/index.md)
