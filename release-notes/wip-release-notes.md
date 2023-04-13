@@ -4,12 +4,21 @@
 
 Date: ???
 
+### Bugs
+
 ### Features
 
-- Added `HasContent` string extension methods.
-- Added `ForEach` and `ForEachAsync` extension methods.
-- #2: Added `IsEmpty` and `IsNullOrEmpty` extension methods.
-- #31: Added `ToDictionary` extension methods.
-- #40: Added `IsAfter`, `IsAfterOrEqualTo`, `IsBefore` and `IsBeforeOrEqualTo` string extensions.
+### Miscellaneous
+
+### Dependent Packages
+
+- .NET 5.0
+  - No changes
+- .NET Core 3.1
+  - No changes
+- General
+  - No changes
+
+---
 
 
