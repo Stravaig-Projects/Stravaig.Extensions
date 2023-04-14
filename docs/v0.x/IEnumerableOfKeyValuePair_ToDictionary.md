@@ -1,10 +1,10 @@
-# IEnumerable<KeyValuePair<TKey, TValue>>.ToDictionary(...)
+# IEnumerable< KeyValuePair<TKey, TValue> >.ToDictionary(...)
 
 Converts the `KeyValuePair<TKey,TValue>` to a `Dictionary<TKey,TValue>`
 
 ---
 
-## Dictionary<TKey,TValue> ToDictionary(this IEnumerable<KeyValuePair<TKey,TValue>> source)
+## Dictionary<TKey,TValue> ToDictionary(this IEnumerable< KeyValuePair<TKey,TValue> > source)
 
 ### Parameters
 
@@ -23,7 +23,7 @@ KeyValuePair<string, object>[] kvp =
 Dictionary<string, object> dictionary = kvp.ToDictionary();
 ```
 
-## Dictionary<TKey,TValue> ToDictionary(this IEnumerable<KeyValuePair<TKey,TValue>> source, IEqualityComparer<TKey> comparer)
+## Dictionary<TKey,TValue> ToDictionary(this IEnumerable< KeyValuePair<TKey,TValue> > source, IEqualityComparer<TKey> comparer)
 
 ### Parameters
 

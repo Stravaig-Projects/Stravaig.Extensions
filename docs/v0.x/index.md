@@ -7,7 +7,7 @@
 * [IsEmpty](IEnumerable_IsEmpty.md)
 * [IsNullOrEmpty](IEnumerable_IsNullOrEmpty.md)
 
-## IEnumerable<KeyValuePair<TKey,TValue>>
+## IEnumerable< KeyValuePair<TKey,TValue> >
 
 * [ToDictionary](IEnumerableOfKeyValuePair_ToDictionary.md)
 

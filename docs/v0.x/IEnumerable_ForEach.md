@@ -29,7 +29,6 @@ aSequence.ForEach((e) => {
 
 ### Example
 
-sequence.
 ```csharp
 aSequence.ForEach((e,i) => {
     Console.WriteLine($"Item {i}: {e}");
