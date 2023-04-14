@@ -5,3 +5,6 @@ plugins:
 title: Stravaig.Extensions.Core
 description: A set of small extensions to make life a little easier.
 show_downloads: false
+
+nuget:
+  url: https://www.nuget.org/packages/Stravaig.Extensions.Core
