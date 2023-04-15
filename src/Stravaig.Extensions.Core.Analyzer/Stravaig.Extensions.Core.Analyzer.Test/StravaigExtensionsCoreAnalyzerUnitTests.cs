@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System.Threading.Tasks;
 using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
@@ -6,12 +6,11 @@ using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
 
 namespace Stravaig.Extensions.Core.Analyzer.Test
 {
-    [TestClass]
     public class StravaigExtensionsCoreAnalyzerUnitTest
     {
         //No diagnostics expected to show up
-        [TestMethod]
-        public async Task TestMethod1()
+        [Test]
+        public async Task EmptyCodeBlockShouldProduceNoFixes()
         {
             var test = @"";
 
@@ -19,8 +18,8 @@ namespace Stravaig.Extensions.Core.Analyzer.Test
         }
 
         //Diagnostic and CodeFix both triggered and checked for
-        [TestMethod]
-        public async Task TestMethod2()
+        [Test]
+        public async Task CodeBlockWithAnalyserTriggerShouldProduceFix()
         {
             var test = @"
     using System;
@@ -52,7 +51,10 @@ namespace Stravaig.Extensions.Core.Analyzer.Test
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("StravaigExtensionsCoreAnalyzer").WithLocation(0).WithArguments("TypeName");
+            var expected = VerifyCS
+                .Diagnostic("SEC0001")
+                .WithLocation(0)
+                .WithArguments("TypeName");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
         }
     }

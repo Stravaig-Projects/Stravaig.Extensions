@@ -7,7 +7,7 @@ namespace Stravaig.Extensions.Core.Analyzer.Test
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
     {
-        public class Test : CSharpCodeRefactoringTest<TCodeRefactoring, MSTestVerifier>
+        public class Test : CSharpCodeRefactoringTest<TCodeRefactoring, NUnitVerifier>
         {
             public Test()
             {
