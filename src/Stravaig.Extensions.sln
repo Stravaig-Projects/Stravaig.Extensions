@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__BuildAndDeploy", "__BuildAndDeploy", "{3D36916B-2367-4624-BDCF-864173796B30}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,21 +22,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__Documentation", "__Docume
 		..\release-notes\wip-release-notes.md = ..\release-notes\wip-release-notes.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core", "Stravaig.Extensions.Core\Stravaig.Extensions.Core.csproj", "{0C33F3EA-C826-4F31-9050-17393D3DDE67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stravaig.Extensions.Core", "Stravaig.Extensions.Core\Stravaig.Extensions.Core.csproj", "{0C33F3EA-C826-4F31-9050-17393D3DDE67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Tests", "Stravaig.Extensions.Core.Tests\Stravaig.Extensions.Core.Tests.csproj", "{85D106B4-A319-442E-B94C-160A3D5F6577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stravaig.Extensions.Core.Tests", "Stravaig.Extensions.Core.Tests\Stravaig.Extensions.Core.Tests.csproj", "{85D106B4-A319-442E-B94C-160A3D5F6577}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__Repo", "__Repo", "{4007B796-4688-4784-88BA-D32E2C06CF9C}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj", "{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.CodeFixes", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj", "{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Package", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Package\Stravaig.Extensions.Core.Analyzer.Package.csproj", "{359B1A0F-4278-4FA7-BBC2-751A557351ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Test", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Test\Stravaig.Extensions.Core.Analyzer.Test.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Vsix", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Vsix\Stravaig.Extensions.Core.Analyzer.Vsix.csproj", "{0EAAA618-500A-4757-AE19-825BCCACEF35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzer", "Analyzer", "{1AD1E780-48FA-450E-87D2-F656B89DEACC}"
+EndProject
 Global
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {064958BE-42C5-4268-8132-49EF6D009D99}
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0C33F3EA-C826-4F31-9050-17393D3DDE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -47,9 +57,38 @@ Global
 		{85D106B4-A319-442E-B94C-160A3D5F6577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D106B4-A319-442E-B94C-160A3D5F6577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D106B4-A319-442E-B94C-160A3D5F6577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EAAA618-500A-4757-AE19-825BCCACEF35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EAAA618-500A-4757-AE19-825BCCACEF35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EAAA618-500A-4757-AE19-825BCCACEF35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EAAA618-500A-4757-AE19-825BCCACEF35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
+		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
+		{359B1A0F-4278-4FA7-BBC2-751A557351ED} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
+		{FC0838E7-305C-4B14-90B4-4607B54F0CAD} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
+		{0EAAA618-500A-4757-AE19-825BCCACEF35} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {064958BE-42C5-4268-8132-49EF6D009D99}
 	EndGlobalSection
 EndGlobal
