@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
-    Stravaig.Extensions.Core.Analyzer.StravaigExtensionsCoreAnalyzerAnalyzer,
+    Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
     Stravaig.Extensions.Core.Analyzer.StravaigExtensionsCoreAnalyzerCodeFixProvider>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Test

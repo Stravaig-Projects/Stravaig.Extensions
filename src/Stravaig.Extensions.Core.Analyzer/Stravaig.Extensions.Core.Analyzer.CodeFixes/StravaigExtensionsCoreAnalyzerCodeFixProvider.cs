@@ -20,7 +20,7 @@ namespace Stravaig.Extensions.Core.Analyzer
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(StravaigExtensionsCoreAnalyzerAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(Sec0001UseStringHasContentAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
