@@ -79,14 +79,14 @@ class MyClass
         public async Task NotStringIsNullOrWhiteSpaceStringExpressionShouldActivateDiagnostic()
         {
             const string test = @"using System;
- namespace MyNamespace;
- class MyClass
- {
-     public bool MyMethod(int aNumber)
-     {
-         return (!string.IsNullOrWhiteSpace(aNumber.ToString()));
-     }
- }";
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return (!string.IsNullOrWhiteSpace(aNumber.ToString()));
+    }
+}";
  
             var expected = VerifyCS
                 .Diagnostic("SEC0001")
