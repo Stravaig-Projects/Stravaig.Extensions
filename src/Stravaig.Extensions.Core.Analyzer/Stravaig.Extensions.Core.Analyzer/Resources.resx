@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SEC0001_AnalyzerTitle" xml:space="preserve">
-    <value>string can be checked with .HasContent()</value>
+    <value>String can be checked with .HasContent()</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="SEC0001_Description" xml:space="preserve">
-    <value>!string.IsNullOrWhiteSpace() should be repaced with .HasContent()</value>
+    <value>!string.IsNullOrWhiteSpace() or string.IsNullOrWhiteSpace() == false should be repaced with .HasContent()</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="SEC0001_MessageFormat" xml:space="preserve">

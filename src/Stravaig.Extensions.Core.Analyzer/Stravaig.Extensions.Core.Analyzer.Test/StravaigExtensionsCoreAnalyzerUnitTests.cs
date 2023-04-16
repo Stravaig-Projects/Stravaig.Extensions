@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
-using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
-    Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
-    Stravaig.Extensions.Core.Analyzer.StravaigExtensionsCoreAnalyzerCodeFixProvider>;
+using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpAnalyzerVerifier<Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Test
 {
@@ -23,39 +21,23 @@ namespace Stravaig.Extensions.Core.Analyzer.Test
         {
             var test = @"
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
 
-    namespace ConsoleApplication1
+    namespace MyNamespace
     {
-        class {|#0:TypeName|}
-        {   
-        }
-    }";
-
-            var fixtest = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
-
-    namespace ConsoleApplication1
-    {
-        class TYPENAME
-        {   
+        class MyClass
+        {
+            public bool MyMethod(string someString)
+            {
+                return (!string.IsNullOrWhiteSpace(someString));
+            }
         }
     }";
 
             var expected = VerifyCS
                 .Diagnostic("SEC0001")
-                .WithLocation(0)
-                .WithArguments("TypeName");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+                .WithLocation(10, 25)
+                .WithArguments("someString");
+            await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
     }
 }
