@@ -10,33 +10,88 @@ namespace Stravaig.Extensions.Core.Analyzer.Test
         [Test]
         public async Task EmptyCodeBlockShouldProduceNoFixes()
         {
-            var test = @"";
+            const string test = @"";
 
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-        //Diagnostic and CodeFix both triggered and checked for
         [Test]
-        public async Task CodeBlockWithAnalyserTriggerShouldProduceFix()
+        public async Task NotStringIsNullOrWhiteSpaceStringArgShouldActivateDiagnostic()
         {
-            var test = @"
-    using System;
-
-    namespace MyNamespace
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
     {
-        class MyClass
-        {
-            public bool MyMethod(string someString)
-            {
-                return (!string.IsNullOrWhiteSpace(someString));
-            }
-        }
-    }";
+        return (!string.IsNullOrWhiteSpace(someString));
+    }
+}";
 
             var expected = VerifyCS
                 .Diagnostic("SEC0001")
-                .WithLocation(10, 25)
+                .WithLocation(7, 17)
                 .WithArguments("someString");
+            await VerifyCS.VerifyAnalyzerAsync(test, expected);
+        }
+        
+        [Test]
+        public async Task StringIsNullOrWhiteSpaceStringArgEqualsFalseShouldActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return (string.IsNullOrWhiteSpace(someString) == false);
+    }
+}";
+
+            var expected = VerifyCS
+                .Diagnostic("SEC0001")
+                .WithLocation(7, 17)
+                .WithArguments("someString");
+            await VerifyCS.VerifyAnalyzerAsync(test, expected);
+        }
+
+        [Test]
+        public async Task StringIsNullOrWhiteSpaceStringExpressionEqualsFalseShouldActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return (string.IsNullOrWhiteSpace(aNumber.ToString()) == false);
+    }
+}";
+
+            var expected = VerifyCS
+                .Diagnostic("SEC0001")
+                .WithLocation(7, 17)
+                .WithArguments("aNumber.ToString()");
+            await VerifyCS.VerifyAnalyzerAsync(test, expected);
+        }
+        
+        [Test]
+        public async Task NotStringIsNullOrWhiteSpaceStringExpressionShouldActivateDiagnostic()
+        {
+            const string test = @"using System;
+ namespace MyNamespace;
+ class MyClass
+ {
+     public bool MyMethod(int aNumber)
+     {
+         return (!string.IsNullOrWhiteSpace(aNumber.ToString()));
+     }
+ }";
+ 
+            var expected = VerifyCS
+                .Diagnostic("SEC0001")
+                .WithLocation(7, 17)
+                .WithArguments("aNumber.ToString()");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
     }
