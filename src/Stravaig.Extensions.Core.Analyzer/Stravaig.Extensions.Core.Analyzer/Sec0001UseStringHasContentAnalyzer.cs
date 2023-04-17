@@ -67,6 +67,9 @@ namespace Stravaig.Extensions.Core.Analyzer
                 return;
             }
 
+            if (invocationExpression.ArgumentList.Arguments.Count == 0)
+                return; // Code is incomplete.
+
             var argument = invocationExpression.ArgumentList.Arguments.First();
             var argText = argument.GetText().ToString();
             var diagnostic = Diagnostic.Create(Rule, expressionNode.GetLocation(), argText);

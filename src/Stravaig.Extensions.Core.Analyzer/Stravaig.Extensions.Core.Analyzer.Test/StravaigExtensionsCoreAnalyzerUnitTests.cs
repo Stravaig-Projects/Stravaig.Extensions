@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpAnalyzerVerifier<Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Test
@@ -92,6 +94,23 @@ class MyClass
                 .Diagnostic("SEC0001")
                 .WithLocation(7, 17)
                 .WithArguments("aNumber.ToString()");
+            await VerifyCS.VerifyAnalyzerAsync(test, expected);
+        }
+
+        [Test]
+        public async Task NoArgumentShouldNotActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return (!string.IsNullOrWhiteSpace(/* Missing argument here */));
+    }
+}";
+            var expected = new DiagnosticResult("CS7036", DiagnosticSeverity.Error)
+                .WithLocation(7, 25); // Missing argument
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
     }
