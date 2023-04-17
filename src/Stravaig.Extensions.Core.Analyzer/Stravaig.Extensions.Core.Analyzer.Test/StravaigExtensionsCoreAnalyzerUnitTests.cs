@@ -113,5 +113,69 @@ class MyClass
                 .WithLocation(7, 25); // Missing argument
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
+
+        [Test]
+        public async Task InvertedCheckShouldNotActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return string.IsNullOrWhiteSpace(someString);
+    }
+}";
+            await VerifyCS.VerifyAnalyzerAsync(test);
+        }
+
+        [Test]
+        public async Task InvertedEqualityCheckShouldNotActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return string.IsNullOrWhiteSpace(someString) == true;
+    }
+}";
+            await VerifyCS.VerifyAnalyzerAsync(test);
+        }
+
+        [Test]
+        public async Task NotOnStringClassShouldNotActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return !MyClass.IsNullOrWhiteSpace(someString);
+    }
+
+    public static bool IsNullOrWhiteSpace(string stuff) => false;
+}";
+            await VerifyCS.VerifyAnalyzerAsync(test);
+        }
+
+        [Test]
+        public async Task ThisMethodCallShouldNotActivateDiagnostic()
+        {
+            const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return !IsNullOrWhiteSpace(someString);
+    }
+
+    public bool IsNullOrWhiteSpace(string stuff) => false;
+}";
+            await VerifyCS.VerifyAnalyzerAsync(test);
+        }
     }
 }
