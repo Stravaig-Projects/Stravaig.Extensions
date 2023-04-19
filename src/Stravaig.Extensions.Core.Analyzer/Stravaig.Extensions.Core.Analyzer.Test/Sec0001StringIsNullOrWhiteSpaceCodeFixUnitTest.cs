@@ -25,9 +25,8 @@ class MyClass
     }
 }";
 
-        const string fix = @"using System;
-using Stravaig.Extensions.Core;
-
+        const string fix = @"using Stravaig.Extensions.Core;
+using System;
 namespace MyNamespace;
 class MyClass
 {

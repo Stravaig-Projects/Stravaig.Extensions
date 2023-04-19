@@ -9,111 +9,165 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using Document = Microsoft.CodeAnalysis.Document;
 
-namespace Stravaig.Extensions.Core.Analyzer
+namespace Stravaig.Extensions.Core.Analyzer;
+
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Sec0001UseStringHasContentAnalyzerCodeFixProvider)), Shared]
+public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Sec0001UseStringHasContentAnalyzerCodeFixProvider)), Shared]
-    public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
+    private static readonly ImmutableArray<string> CachedFixableDiagnostics =
+        ImmutableArray.Create(Sec0001UseStringHasContentAnalyzer.DiagnosticId);
+    public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
+
+    public sealed override FixAllProvider GetFixAllProvider()
     {
-        private static readonly ImmutableArray<string> CachedFixableDiagnostics =
-            ImmutableArray.Create(Sec0001UseStringHasContentAnalyzer.DiagnosticId);
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
+        // See https://github.com/dotnet/roslyn/blob/main/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
+        return WellKnownFixAllProviders.BatchFixer;
+    }
 
-        public sealed override FixAllProvider GetFixAllProvider()
+    public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
+    {
+        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+
+        // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
+
+        // Find the type declaration identified by the diagnostic.
+        var declaration = root.FindToken(diagnosticSpan.Start);
+
+        var declarationKind = declaration.Kind();
+        switch (declarationKind)
         {
-            // See https://github.com/dotnet/roslyn/blob/main/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
-            return WellKnownFixAllProviders.BatchFixer;
+            case SyntaxKind.ExclamationToken:
+                var notExpression = (PrefixUnaryExpressionSyntax) declaration.Parent;
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        title: CodeFixResources.SEC0001CodeFixTitle,
+                        createChangedDocument: ct => FixNotStringIsNullOrWhiteSpaceAsync(context.Document, notExpression, ct),
+                        equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)),
+                    diagnostic);
+                break;
+            case SyntaxKind.EqualsExpression:
+                var equalsExpression = (BinaryExpressionSyntax) declaration.Parent;
+                break;
         }
+    }
 
-        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
-        {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-
-            // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-
-            // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start);
-
-            var declarationKind = declaration.Kind();
-            switch (declarationKind)
-            {
-                case SyntaxKind.ExclamationToken:
-                    var notExpression = (PrefixUnaryExpressionSyntax) declaration.Parent;
-                    context.RegisterCodeFix(
-                        CodeAction.Create(
-                            title: CodeFixResources.CodeFixTitle,
-                            createChangedDocument: ct => FixNotStringIsNullOrWhiteSpaceAsync(context.Document, notExpression, ct),
-                            equivalenceKey: nameof(CodeFixResources.CodeFixTitle)),
-                        diagnostic);
-                    break;
-                case SyntaxKind.EqualsExpression:
-                    var equalsExpression = (BinaryExpressionSyntax) declaration.Parent;
-                    break;
-            }
-
-            // Register a code action that will invoke the fix.
-            //context.RegisterCodeFix(
-            //    CodeAction.Create(
-            //        title: CodeFixResources.CodeFixTitle,
-            //        createChangedSolution: c => MakeUppercaseAsync(context.Document, declaration, c),
-            //        equivalenceKey: nameof(CodeFixResources.CodeFixTitle)),
-            //    diagnostic);
-        }
-
-        private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document document, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)
+    private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document document, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)
+    {
+        try
         {
             int aNumber = 123;
             string someString = "someString";
-            if (!string.IsNullOrWhiteSpace(someString)){ }
-            if (!string.IsNullOrWhiteSpace(aNumber.ToString())) { }
-            if (someString.Contains("s")) { }
-            if (aNumber.ToString().Contains("1")) { }
+            if (!string.IsNullOrWhiteSpace(someString))
+            {
+            }
+
+            if (!string.IsNullOrWhiteSpace(aNumber.ToString()))
+            {
+            }
+
+            if (someString.Contains("s"))
+            {
+            }
+
+            if (aNumber.ToString().Contains("1"))
+            {
+            }
 
             var invocation = notExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
-            var stringObjectToken = (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
+            var stringObjectToken =
+                (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
 
-            //var newExpression = notExpression.Parent.ReplaceNode(notExpression, stringObjectToken);
-            var stringIdentifierName = SyntaxFactory.IdentifierName(stringObjectToken.GetFirstToken().Text);
-            var simpleNameSyntax = SyntaxFactory.IdentifierName("HasContent");
-            var simpleMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
-                SyntaxKind.SimpleMemberAccessExpression,
-                stringIdentifierName,
-                SyntaxFactory.Token(SyntaxKind.DotToken),
-                simpleNameSyntax);
-            var invocationExpression = SyntaxFactory.InvocationExpression(simpleMemberAccessExpression);
-            
+            var invocationExpression = BuildStringHasContentNodes(stringObjectToken);
+
             SyntaxNode oldRoot = await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
             SyntaxNode newRoot = oldRoot.ReplaceNode(notExpression, invocationExpression);
-            
-            // TODO: Determine if a new using is required
-            
+
+            newRoot = UseStravaigExtensionsCore(newRoot);
+
             return document.WithSyntaxRoot(newRoot);
         }
-
-        private async Task<Solution> MakeUppercaseAsync(Document document, TypeDeclarationSyntax typeDecl, CancellationToken cancellationToken)
+        catch (Exception ex)
         {
-            // Compute new uppercase name.
-            var identifierToken = typeDecl.Identifier;
-            var newName = identifierToken.Text.ToUpperInvariant();
-
-            // Get the symbol representing the type to be renamed.
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
-            var typeSymbol = semanticModel.GetDeclaredSymbol(typeDecl, cancellationToken);
-
-            // Produce a new solution that has all references to that type renamed, including the declaration.
-            var originalSolution = document.Project.Solution;
-            var optionSet = originalSolution.Workspace.Options;
-            var newSolution = await Renamer.RenameSymbolAsync(document.Project.Solution, typeSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
-
-            // Return the new solution with the now-uppercase type name.
-            return newSolution;
+            Debug.WriteLine("It went horribly horribly wrong!");
+            Debug.WriteLine(ex);
+            throw;
         }
     }
+
+    private SyntaxNode UseStravaigExtensionsCore(SyntaxNode oldRoot)
+    {
+        SyntaxNode insertBefore = null;
+        foreach (var usingDirective in oldRoot.ChildNodes().OfType<UsingDirectiveSyntax>())
+        {
+            string usingNamespace = "";
+            if (usingDirective.Name.Kind() == SyntaxKind.IdentifierName)
+            {
+                var identifierName = (IdentifierNameSyntax)usingDirective.Name;
+                usingNamespace = identifierName.Identifier.Text;
+            }
+            else if (usingDirective.Name.Kind() == SyntaxKind.QualifiedName)
+            {
+                var qualifiedIdentifierName = (QualifiedNameSyntax)usingDirective.Name;
+                usingNamespace = qualifiedIdentifierName.QualifiedText();
+            }
+            if (usingNamespace.Equals("Stravaig.Extensions.Core"))
+                return oldRoot;
+
+            if (usingNamespace.IsAfter("Stravaig.Extensions.Core", StringComparison.Ordinal))
+            {
+                insertBefore = usingDirective;
+                break;
+            }
+        }
+
+        insertBefore ??= oldRoot.ChildNodes().First();
+        var newRoot = oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
+
+        return newRoot;
+    }
+
+    private IEnumerable<SyntaxNode> UsingStravaigExtensionsCore()
+    {
+        SimpleNameSyntax stravaig = SyntaxFactory.IdentifierName("Stravaig");
+        SimpleNameSyntax extensions = SyntaxFactory.IdentifierName("Extensions");
+        SimpleNameSyntax core = SyntaxFactory.IdentifierName("Core");
+        QualifiedNameSyntax stravaigExtensions = SyntaxFactory.QualifiedName(stravaig, extensions);
+        NameSyntax name = SyntaxFactory.QualifiedName(stravaigExtensions, core);
+        SyntaxNode usingStatement = SyntaxFactory.UsingDirective(name);
+        return new[] { usingStatement };
+    }
+
+    private static InvocationExpressionSyntax BuildStringHasContentNodes(IdentifierNameSyntax stringObjectToken)
+    {
+        var stringIdentifierName = SyntaxFactory.IdentifierName(stringObjectToken.GetFirstToken().Text);
+        var simpleNameSyntax = SyntaxFactory.IdentifierName("HasContent");
+        var simpleMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+            SyntaxKind.SimpleMemberAccessExpression,
+            stringIdentifierName,
+            SyntaxFactory.Token(SyntaxKind.DotToken),
+            simpleNameSyntax);
+        var invocationExpression = SyntaxFactory.InvocationExpression(simpleMemberAccessExpression);
+        return invocationExpression;
+    }
 }
+
+public static class QualifiedNameSyntaxExtensions
+{
+    public static string QualifiedText(this QualifiedNameSyntax qualifiedName)
+    {
+        string left = qualifiedName.Left.Kind() == SyntaxKind.QualifiedName
+            ? ((QualifiedNameSyntax)qualifiedName.Left).QualifiedText()
+            : ((IdentifierNameSyntax)qualifiedName.Left).Identifier.Text;
+        string right = ((IdentifierNameSyntax)qualifiedName.Right).Identifier.Text;
+        return $"{left}.{right}";
+    }
+}// 
