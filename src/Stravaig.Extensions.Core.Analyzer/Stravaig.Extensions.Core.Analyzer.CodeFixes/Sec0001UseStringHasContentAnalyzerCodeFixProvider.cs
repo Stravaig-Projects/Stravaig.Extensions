@@ -10,8 +10,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
+using Document = Microsoft.CodeAnalysis.Document;
 
 namespace Stravaig.Extensions.Core.Analyzer
 {
@@ -65,22 +67,34 @@ namespace Stravaig.Extensions.Core.Analyzer
             //    diagnostic);
         }
 
-        private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document contextDocument, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)
+        private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document document, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)
         {
             int aNumber = 123;
             string someString = "someString";
             if (!string.IsNullOrWhiteSpace(someString)){ }
+            if (!string.IsNullOrWhiteSpace(aNumber.ToString())) { }
             if (someString.Contains("s")) { }
             if (aNumber.ToString().Contains("1")) { }
 
             var invocation = notExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
-            var stringObjectToken = invocation.ArgumentList.Arguments.First().ChildNodes().First();
+            var stringObjectToken = (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
 
-
-            //var parent = notExpression.Parent.ReplaceNode(notExpression, )
-
-            await Task.CompletedTask;
-            return null;
+            //var newExpression = notExpression.Parent.ReplaceNode(notExpression, stringObjectToken);
+            var stringIdentifierName = SyntaxFactory.IdentifierName(stringObjectToken.GetFirstToken().Text);
+            var simpleNameSyntax = SyntaxFactory.IdentifierName("HasContent");
+            var simpleMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
+                SyntaxKind.SimpleMemberAccessExpression,
+                stringIdentifierName,
+                SyntaxFactory.Token(SyntaxKind.DotToken),
+                simpleNameSyntax);
+            var invocationExpression = SyntaxFactory.InvocationExpression(simpleMemberAccessExpression);
+            
+            SyntaxNode oldRoot = await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
+            SyntaxNode newRoot = oldRoot.ReplaceNode(notExpression, invocationExpression);
+            
+            // TODO: Determine if a new using is required
+            
+            return document.WithSyntaxRoot(newRoot);
         }
 
         private async Task<Solution> MakeUppercaseAsync(Document document, TypeDeclarationSyntax typeDecl, CancellationToken cancellationToken)

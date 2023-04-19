@@ -1,5 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzerCodeFixProvider>;
@@ -34,7 +37,11 @@ class MyClass
     }
 }";
 
-        await VerifyCS.VerifyCodeFixAsync(test, fix);
+        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
+            .WithSpan(7, 17, 7, 55)
+            .WithArguments("someString");
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
     }
 
 //    [Test]
