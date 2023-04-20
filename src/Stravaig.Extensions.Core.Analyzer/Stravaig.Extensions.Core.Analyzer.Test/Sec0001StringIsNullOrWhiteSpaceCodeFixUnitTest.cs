@@ -98,7 +98,7 @@ class MyClass
         return (someString.HasContent());
     }
 }";
-
+        
         var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
             .WithSpan(7, 17, 7, 55)
             .WithArguments("someString");
@@ -106,6 +106,42 @@ class MyClass
             .VerifyCodeFixAsync(test, fix);
     }
 
+    [Test]
+    public async Task UsingDeclarationsInsideNamespaceNotStringIsNullOrWhiteSpaceStringArg()
+    {
+        const string test = @"namespace MyNamespace
+{
+    using System;
+
+    class MyClass
+    {
+        public bool MyMethod(string someString)
+        {
+            return ([|!string.IsNullOrWhiteSpace(someString)|]);
+        }
+    }
+}";
+
+        const string fix = @"namespace MyNamespace
+{
+    using Stravaig.Extensions.Core;
+    using System;
+
+    class MyClass
+    {
+        public bool MyMethod(string someString)
+        {
+            return (someString.HasContent());
+        }
+    }
+}";
+
+        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
+            .WithSpan(7, 17, 7, 55)
+            .WithArguments("someString");
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
+    }
     //    [Test]
     //    public async Task StringIsNullOrWhiteSpaceStringArgEqualsFalseShouldActivateDiagnostic()
     //    {

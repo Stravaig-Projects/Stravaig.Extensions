@@ -105,8 +105,50 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 
     private CompilationUnitSyntax UseStravaigExtensionsCore(CompilationUnitSyntax oldRoot)
     {
+        SyntaxNode searchStart;
+        SyntaxList<UsingDirectiveSyntax> usingDeclarations;
+        if (oldRoot.Usings.Count != 0)
+        {
+            searchStart = oldRoot;
+            usingDeclarations = oldRoot.Usings;
+        }
+        else
+        {
+            searchStart = GetNamespaceDeclaration(oldRoot);
+            // TODO: If no namespace??
+            usingDeclarations = ((BaseNamespaceDeclarationSyntax)searchStart).Usings;
+        }
+
+        (bool usingExists, SyntaxNode insertBefore) = FindInsertionPoint(searchStart, usingDeclarations);
+
+        if (usingExists)
+            return oldRoot;
+       
+        if (insertBefore != null)
+        {
+            return oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
+        }
+
+        return oldRoot.AddUsings(UsingStravaigExtensionsCore());
+    }
+
+    private static BaseNamespaceDeclarationSyntax GetNamespaceDeclaration(CompilationUnitSyntax oldRoot)
+    {
+        
+        var childNodes = oldRoot.Members;
+        var fileScopesNamespaceNodes = childNodes.OfType<FileScopedNamespaceDeclarationSyntax>();
+        var namespaceDeclaration = fileScopesNamespaceNodes.FirstOrDefault();
+        if (namespaceDeclaration != null)
+            return namespaceDeclaration;
+
+        var traditionalNamespaceNodes = childNodes.OfType<NamespaceDeclarationSyntax>();
+        return traditionalNamespaceNodes.FirstOrDefault();
+    }
+
+    private static (bool, SyntaxNode) FindInsertionPoint(SyntaxNode searchStart, SyntaxList<UsingDirectiveSyntax> usings)
+    {
         SyntaxNode insertBefore = null;
-        foreach (var usingDirective in oldRoot.Usings)
+        foreach (var usingDirective in usings)
         {
             string usingNamespace = "";
             if (usingDirective.Name.Kind() == SyntaxKind.IdentifierName)
@@ -119,8 +161,9 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
                 var qualifiedIdentifierName = (QualifiedNameSyntax)usingDirective.Name;
                 usingNamespace = qualifiedIdentifierName.QualifiedText();
             }
+
             if (usingNamespace.Equals("Stravaig.Extensions.Core"))
-                return oldRoot;
+                return (true, null);
 
             if (usingNamespace.IsAfter("Stravaig.Extensions.Core", StringComparison.Ordinal))
             {
@@ -128,12 +171,7 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
             }
         }
 
-        if (insertBefore != null)
-        {
-            return oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
-        }
-
-        return oldRoot.AddUsings(UsingStravaigExtensionsCore());
+        return (false, insertBefore);
     }
 
     private UsingDirectiveSyntax[] UsingStravaigExtensionsCore()
