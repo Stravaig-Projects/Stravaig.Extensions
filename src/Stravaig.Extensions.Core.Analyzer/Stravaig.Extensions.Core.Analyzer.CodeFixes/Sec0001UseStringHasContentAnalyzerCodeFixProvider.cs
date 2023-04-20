@@ -88,12 +88,12 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 
             var invocationExpression = BuildStringHasContentNodes(stringObjectToken);
 
-            SyntaxNode oldRoot = await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
-            SyntaxNode newRoot = oldRoot.ReplaceNode(notExpression, invocationExpression);
+            var rootNode = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
+            rootNode = rootNode.ReplaceNode(notExpression, invocationExpression);
 
-            newRoot = UseStravaigExtensionsCore(newRoot);
+            rootNode = UseStravaigExtensionsCore(rootNode);
 
-            return document.WithSyntaxRoot(newRoot);
+            return document.WithSyntaxRoot(rootNode);
         }
         catch (Exception ex)
         {
@@ -103,10 +103,10 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
         }
     }
 
-    private SyntaxNode UseStravaigExtensionsCore(SyntaxNode oldRoot)
+    private CompilationUnitSyntax UseStravaigExtensionsCore(CompilationUnitSyntax oldRoot)
     {
         SyntaxNode insertBefore = null;
-        foreach (var usingDirective in oldRoot.ChildNodes().OfType<UsingDirectiveSyntax>())
+        foreach (var usingDirective in oldRoot.Usings)
         {
             string usingNamespace = "";
             if (usingDirective.Name.Kind() == SyntaxKind.IdentifierName)
@@ -124,25 +124,26 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 
             if (usingNamespace.IsAfter("Stravaig.Extensions.Core", StringComparison.Ordinal))
             {
-                insertBefore = usingDirective;
-                break;
+                insertBefore ??= usingDirective;
             }
         }
 
-        insertBefore ??= oldRoot.ChildNodes().First();
-        var newRoot = oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
+        if (insertBefore != null)
+        {
+            return oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
+        }
 
-        return newRoot;
+        return oldRoot.AddUsings(UsingStravaigExtensionsCore());
     }
 
-    private IEnumerable<SyntaxNode> UsingStravaigExtensionsCore()
+    private UsingDirectiveSyntax[] UsingStravaigExtensionsCore()
     {
         SimpleNameSyntax stravaig = SyntaxFactory.IdentifierName("Stravaig");
         SimpleNameSyntax extensions = SyntaxFactory.IdentifierName("Extensions");
         SimpleNameSyntax core = SyntaxFactory.IdentifierName("Core");
         QualifiedNameSyntax stravaigExtensions = SyntaxFactory.QualifiedName(stravaig, extensions);
         NameSyntax name = SyntaxFactory.QualifiedName(stravaigExtensions, core);
-        SyntaxNode usingStatement = SyntaxFactory.UsingDirective(name);
+        UsingDirectiveSyntax usingStatement = SyntaxFactory.UsingDirective(name);
         return new[] { usingStatement };
     }
 
