@@ -68,24 +68,6 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 
     private async Task<Document> FixStringIsNullOrWhiteSpaceEqualsFalseAsync(Document document, BinaryExpressionSyntax equalsExpression, CancellationToken ct)
     {
-        int aNumber = 123;
-        string someString = "someString";
-        if (string.IsNullOrWhiteSpace(someString) == false)
-        {
-        }
-
-        if (!string.IsNullOrWhiteSpace(aNumber.ToString()))
-        {
-        }
-
-        if (someString.Contains("s"))
-        {
-        }
-
-        if (aNumber.ToString().Contains("1"))
-        {
-        }
-
         var invocation = equalsExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
         var stringObjectToken =
             (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
@@ -104,32 +86,12 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
     {
         try
         {
-            int aNumber = 123;
-            string someString = "someString";
-            if (!string.IsNullOrWhiteSpace(someString))
-            {
-            }
-
-            if (!string.IsNullOrWhiteSpace(aNumber.ToString()))
-            {
-            }
-
-            if (someString.Contains("s"))
-            {
-            }
-
-            if (aNumber.ToString().Contains("1"))
-            {
-            }
-
-            var invocation = notExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
-            var stringObjectToken =
-                (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
-
-            var invocationExpression = BuildStringHasContentNodes(stringObjectToken);
-
             var rootNode = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
-            rootNode = rootNode.ReplaceNode(notExpression, invocationExpression);
+            var invocation = notExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
+            
+            var stringArg = (ExpressionSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
+            var hasContentExpression = BuildStringHasContentNodes(stringArg);
+            rootNode = rootNode.ReplaceNode(notExpression, hasContentExpression);
 
             rootNode = UseStravaigExtensionsCore(rootNode);
 
@@ -159,7 +121,7 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
             usingDeclarations = ((BaseNamespaceDeclarationSyntax)searchStart).Usings;
         }
 
-        (bool usingExists, SyntaxNode insertBefore) = FindInsertionPoint(searchStart, usingDeclarations);
+        (bool usingExists, SyntaxNode insertBefore) = FindInsertionPoint(usingDeclarations);
 
         if (usingExists)
             return oldRoot;
@@ -185,7 +147,7 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
         return traditionalNamespaceNodes.FirstOrDefault();
     }
 
-    private static (bool, SyntaxNode) FindInsertionPoint(SyntaxNode searchStart, SyntaxList<UsingDirectiveSyntax> usings)
+    private static (bool, SyntaxNode) FindInsertionPoint(SyntaxList<UsingDirectiveSyntax> usings)
     {
         SyntaxNode insertBefore = null;
         foreach (var usingDirective in usings)
@@ -199,7 +161,7 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
             else if (usingDirective.Name.Kind() == SyntaxKind.QualifiedName)
             {
                 var qualifiedIdentifierName = (QualifiedNameSyntax)usingDirective.Name;
-                usingNamespace = qualifiedIdentifierName.QualifiedText();
+                usingNamespace = qualifiedIdentifierName.AsString();
             }
 
             if (usingNamespace.Equals("Stravaig.Extensions.Core"))
@@ -224,29 +186,16 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
         UsingDirectiveSyntax usingStatement = SyntaxFactory.UsingDirective(name);
         return new[] { usingStatement };
     }
-
-    private static InvocationExpressionSyntax BuildStringHasContentNodes(IdentifierNameSyntax stringObjectToken)
+    
+    private static InvocationExpressionSyntax BuildStringHasContentNodes(ExpressionSyntax stringExpression)
     {
-        var stringIdentifierName = SyntaxFactory.IdentifierName(stringObjectToken.GetFirstToken().Text);
         var simpleNameSyntax = SyntaxFactory.IdentifierName("HasContent");
         var simpleMemberAccessExpression = SyntaxFactory.MemberAccessExpression(
             SyntaxKind.SimpleMemberAccessExpression,
-            stringIdentifierName,
+            stringExpression,
             SyntaxFactory.Token(SyntaxKind.DotToken),
             simpleNameSyntax);
         var invocationExpression = SyntaxFactory.InvocationExpression(simpleMemberAccessExpression);
         return invocationExpression;
     }
-}
-
-public static class QualifiedNameSyntaxExtensions
-{
-    public static string QualifiedText(this QualifiedNameSyntax qualifiedName)
-    {
-        string left = qualifiedName.Left.Kind() == SyntaxKind.QualifiedName
-            ? ((QualifiedNameSyntax)qualifiedName.Left).QualifiedText()
-            : ((IdentifierNameSyntax)qualifiedName.Left).Identifier.Text;
-        string right = ((IdentifierNameSyntax)qualifiedName.Right).Identifier.Text;
-        return $"{left}.{right}";
-    }
-}// 
+} 

@@ -38,6 +38,34 @@ class MyClass
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
+    
+    [Test]
+    public async Task NotStringIsNullOrWhiteSpaceStringArgAsExpression()
+    {
+        const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return ([|!string.IsNullOrWhiteSpace(aNumber.ToString())|]);
+    }
+}";
+
+        const string fix = @"using Stravaig.Extensions.Core;
+using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return (aNumber.ToString().HasContent());
+    }
+}";
+
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
+    }
 
     [Test]
     public async Task StringIsNullOrWhiteSpaceStringArgEqualsFalse()
