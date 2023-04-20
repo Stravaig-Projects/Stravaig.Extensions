@@ -34,19 +34,20 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        if (root == null)
+            return;
 
-        // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
         var diagnostic = context.Diagnostics.First();
         var diagnosticSpan = diagnostic.Location.SourceSpan;
 
         // Find the type declaration identified by the diagnostic.
-        var declaration = root.FindToken(diagnosticSpan.Start);
+        var declaration = root.FindNode(diagnosticSpan);
 
         var declarationKind = declaration.Kind();
         switch (declarationKind)
         {
-            case SyntaxKind.ExclamationToken:
-                var notExpression = (PrefixUnaryExpressionSyntax) declaration.Parent;
+            case SyntaxKind.LogicalNotExpression:
+                var notExpression = (PrefixUnaryExpressionSyntax) declaration;
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         title: CodeFixResources.SEC0001CodeFixTitle,
@@ -55,9 +56,48 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
                     diagnostic);
                 break;
             case SyntaxKind.EqualsExpression:
-                var equalsExpression = (BinaryExpressionSyntax) declaration.Parent;
+                var equalsExpression = (BinaryExpressionSyntax) declaration;
+                context.RegisterCodeFix(CodeAction.Create(
+                    title: CodeFixResources.SEC0001CodeFixTitle,
+                    createChangedDocument: ct => FixStringIsNullOrWhiteSpaceEqualsFalseAsync(context.Document, equalsExpression, ct),
+                    equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)
+                    ), diagnostic);
                 break;
         }
+    }
+
+    private async Task<Document> FixStringIsNullOrWhiteSpaceEqualsFalseAsync(Document document, BinaryExpressionSyntax equalsExpression, CancellationToken ct)
+    {
+        int aNumber = 123;
+        string someString = "someString";
+        if (string.IsNullOrWhiteSpace(someString) == false)
+        {
+        }
+
+        if (!string.IsNullOrWhiteSpace(aNumber.ToString()))
+        {
+        }
+
+        if (someString.Contains("s"))
+        {
+        }
+
+        if (aNumber.ToString().Contains("1"))
+        {
+        }
+
+        var invocation = equalsExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
+        var stringObjectToken =
+            (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
+
+        var invocationExpression = BuildStringHasContentNodes(stringObjectToken);
+
+        var rootNode = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
+        rootNode = rootNode.ReplaceNode(equalsExpression, invocationExpression);
+
+        rootNode = UseStravaigExtensionsCore(rootNode);
+
+        return document.WithSyntaxRoot(rootNode);
     }
 
     private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document document, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)

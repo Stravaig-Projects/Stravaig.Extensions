@@ -43,6 +43,37 @@ class MyClass
     }
 
     [Test]
+    public async Task StringIsNullOrWhiteSpaceStringArgEqualsFalse()
+    {
+        const string test = @"using Stravaig.Extensions.Core;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return ([|string.IsNullOrWhiteSpace(someString) == false|]);
+    }
+}";
+
+        const string fix = @"using Stravaig.Extensions.Core;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return (someString.HasContent());
+    }
+}";
+
+
+        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
+            .WithSpan(7, 17, 7, 55)
+            .WithArguments("someString");
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
+    }
+
+    [Test]
     public async Task NoUsingDeclarationsNotStringIsNullOrWhiteSpaceStringArg()
     {
         const string test = @"namespace MyNamespace;
