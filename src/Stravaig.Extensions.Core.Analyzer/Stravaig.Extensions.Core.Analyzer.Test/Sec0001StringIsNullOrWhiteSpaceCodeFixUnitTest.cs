@@ -35,9 +35,6 @@ class MyClass
     }
 }";
 
-        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
-            .WithSpan(7, 17, 7, 55)
-            .WithArguments("someString");
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
@@ -65,10 +62,33 @@ class MyClass
     }
 }";
 
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
+    }
+    
+    [Test]
+    public async Task FalseEqualsStringIsNullOrWhiteSpaceStringArg()
+    {
+        const string test = @"using Stravaig.Extensions.Core;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return ([|false == string.IsNullOrWhiteSpace(someString)|]);
+    }
+}";
 
-        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
-            .WithSpan(7, 17, 7, 55)
-            .WithArguments("someString");
+        const string fix = @"using Stravaig.Extensions.Core;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return (someString.HasContent());
+    }
+}";
+
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
