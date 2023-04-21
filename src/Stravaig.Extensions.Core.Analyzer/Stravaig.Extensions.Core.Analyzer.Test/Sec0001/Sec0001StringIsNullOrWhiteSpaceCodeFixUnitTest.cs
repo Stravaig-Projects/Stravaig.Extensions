@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
-using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
+using static Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzerCodeFixProvider>;
 
@@ -33,8 +33,7 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -61,8 +60,7 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -88,8 +86,7 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -115,8 +112,7 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -141,8 +137,7 @@ class MyClass
         return (someString.HasContent());
     }
 }";
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -171,8 +166,7 @@ class MyClass
         return (someString.HasContent());
     }
 }";
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -205,8 +199,7 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 
     [Test]
@@ -230,7 +223,6 @@ class MyClass
     }
 }";
 
-        await VerifyCS
-            .VerifyCodeFixAsync(test, fix);
+        await VerifyCodeFixAsync(test, fix);
     }
 }
