@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Stravaig.Extensions.Core\Stravaig.Extensions.Core.csproj" />
+    <ProjectReference Include="..\Stravaig.Extensions.Core\Stravaig.Extensions.Core.csproj" />
     <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" />
   </ItemGroup>
 

@@ -68,7 +68,7 @@ namespace Stravaig.Extensions.Core.Analyzer
 
             // ReSharper disable once SimplifyLinqExpressionUseAll
             if (expressionKind == SyntaxKind.EqualsExpression && 
-                !expressionNode.ChildNodes().Any(n => n.Kind() == SyntaxKind.FalseLiteralExpression))
+                !expressionNode.ChildNodes().Any(n => n.IsKind(SyntaxKind.FalseLiteralExpression)))
             {
                 return;
             }

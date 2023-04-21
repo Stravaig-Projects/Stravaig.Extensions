@@ -122,7 +122,7 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="SEC0001_Description" xml:space="preserve">
-    <value>!string.IsNullOrWhiteSpace() or string.IsNullOrWhiteSpace() == false should be repaced with .HasContent()</value>
+    <value>"!string.IsNullOrWhiteSpace(...)" or "string.IsNullOrWhiteSpace(...) == false" should be repaced with "...HasContent()".</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="SEC0001_MessageFormat" xml:space="preserve">

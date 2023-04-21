@@ -31,15 +31,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__Repo", "__Repo", "{4007B7
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj", "{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj", "{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.CodeFixes", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj", "{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.CodeFixes", "Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj", "{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Package", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Package\Stravaig.Extensions.Core.Analyzer.Package.csproj", "{359B1A0F-4278-4FA7-BBC2-751A557351ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Package", "Stravaig.Extensions.Core.Analyzer.Package\Stravaig.Extensions.Core.Analyzer.Package.csproj", "{359B1A0F-4278-4FA7-BBC2-751A557351ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Test", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Test\Stravaig.Extensions.Core.Analyzer.Test.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Test", "Stravaig.Extensions.Core.Analyzer.Tests\Stravaig.Extensions.Core.Analyzer.Tests.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Vsix", "Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.Vsix\Stravaig.Extensions.Core.Analyzer.Vsix.csproj", "{0EAAA618-500A-4757-AE19-825BCCACEF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Vsix", "Stravaig.Extensions.Core.Analyzer.Vsix\Stravaig.Extensions.Core.Analyzer.Vsix.csproj", "{0EAAA618-500A-4757-AE19-825BCCACEF35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzer", "Analyzer", "{1AD1E780-48FA-450E-87D2-F656B89DEACC}"
 EndProject
