@@ -8,3 +8,4 @@
 
 * [Contributors](contributors.md)
 * [Release Notes](release-notes/index.md)
+* [Analysers](analysers/index.md)
