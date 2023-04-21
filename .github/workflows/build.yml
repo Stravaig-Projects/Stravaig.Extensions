@@ -41,7 +41,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       STRAVAIG_SOLUTION: src/Stravaig.Extensions.sln
-      STRAVAIG_TESTS: "**.Tests"
       STRAVAIG_PROJECT: Stravaig.Extensions.Core
     
     steps:
@@ -79,9 +78,12 @@ jobs:
       - name: Build Solution
         run: dotnet build $STRAVAIG_SOLUTION --configuration Release
        
-      - name: Run Tests
-        run: dotnet test src/$STRAVAIG_TESTS/$STRAVAIG_TESTS.csproj --configuration Release
+      - name: Run SEC Tests
+        run: dotnet test src/Stravaig.Extensions.Core.Tests/Stravaig.Extensions.Core.Tests.csproj --configuration Release
        
+      - name: Run Analyser & Code Fix Tests
+        run: dotnet test src/Stravaig.Extensions.Core.Analyzer.Tests/Stravaig.Extensions.Core.Analyzer.Tests.csproj --configuration Release
+
       - name: Package Preview Release
         if: ${{ env.STRAVAIG_IS_PREVIEW == 'true' }}
         run: dotnet pack ./src/$STRAVAIG_PROJECT/$STRAVAIG_PROJECT.csproj --configuration Release --output ./out --include-symbols --include-source /p:VersionPrefix="$STRAVAIG_PACKAGE_VERSION" --version-suffix "$STRAVAIG_PACKAGE_VERSION_SUFFIX" -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
