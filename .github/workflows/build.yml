@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       STRAVAIG_SOLUTION: src/Stravaig.Extensions.sln
-      STRAVAIG_TESTS: Stravaig.Extensions.Core.Tests
+      STRAVAIG_TESTS: "**.Tests"
       STRAVAIG_PROJECT: Stravaig.Extensions.Core
     
     steps:
