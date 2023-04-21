@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - main
+      - "#49/alalyser-v2"
 
     paths-ignore:
       - 'README.md'
