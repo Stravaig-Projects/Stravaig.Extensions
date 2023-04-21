@@ -48,6 +48,25 @@ class MyClass
     }
 
     [Test]
+    public async Task FalseEqualsStringIsNullOrWhiteSpaceStringArg_Matches()
+    {
+        const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return (false == string.IsNullOrWhiteSpace(someString));
+    }
+}";
+
+        var expected = Diagnostic("SEC0001")
+            .WithLocation(7, 17)
+            .WithArguments("someString");
+        await VerifyAnalyzerAsync(test, expected);
+    }
+
+    [Test]
     public async Task StringIsNullOrWhiteSpaceStringExpressionEqualsFalse_Matches()
     {
         const string test = @"using System;
@@ -57,6 +76,25 @@ class MyClass
     public bool MyMethod(int aNumber)
     {
         return (string.IsNullOrWhiteSpace(aNumber.ToString()) == false);
+    }
+}";
+
+        var expected = Diagnostic("SEC0001")
+            .WithLocation(7, 17)
+            .WithArguments("aNumber.ToString()");
+        await VerifyAnalyzerAsync(test, expected);
+    }
+
+    [Test]
+    public async Task FalseEqualsStringIsNullOrWhiteSpaceStringExpression_Matches()
+    {
+        const string test = @"using System;
+namespace MyNamespace;
+class MyClass
+{
+    public bool MyMethod(int aNumber)
+    {
+        return (false == string.IsNullOrWhiteSpace(aNumber.ToString()));
     }
 }";
 

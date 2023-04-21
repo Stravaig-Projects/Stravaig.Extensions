@@ -46,7 +46,7 @@ namespace Stravaig.Extensions.Core.Analyzer
             {
                 case null:
                     return;
-                case ThisExpressionSyntax _:
+                case ThisExpressionSyntax:
                     return;
                 case PredefinedTypeSyntax predefinedType
                     when !predefinedType.Keyword.Text.Equals("string", StringComparison.Ordinal):
@@ -57,7 +57,11 @@ namespace Stravaig.Extensions.Core.Analyzer
             }
 
             var invocationExpression = (InvocationExpressionSyntax)simpleMemberAccessExpression.Parent;
+            if (invocationExpression == null)
+                return;
             var expressionNode = invocationExpression.Parent;
+            if (expressionNode == null)
+                return;
             var expressionKind = expressionNode.Kind();
             if (expressionKind is not (SyntaxKind.LogicalNotExpression or SyntaxKind.EqualsExpression))
                 return;
