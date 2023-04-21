@@ -46,6 +46,8 @@ namespace Stravaig.Extensions.Core.Analyzer
             {
                 case null:
                     return;
+                case ThisExpressionSyntax _:
+                    return;
                 case PredefinedTypeSyntax predefinedType
                     when !predefinedType.Keyword.Text.Equals("string", StringComparison.Ordinal):
                     return;

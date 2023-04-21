@@ -1,12 +1,10 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
     Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzerCodeFixProvider>;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test;
+namespace Stravaig.Extensions.Core.Analyzer.Test.Sec0001;
 
 [TestFixture]
 public class Sec0001StringIsNullOrWhiteSpaceCodeFixUnitTest
@@ -38,7 +36,7 @@ class MyClass
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
-    
+
     [Test]
     public async Task NotStringIsNullOrWhiteSpaceStringArgAsExpression()
     {
@@ -93,7 +91,7 @@ class MyClass
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
-    
+
     [Test]
     public async Task FalseEqualsStringIsNullOrWhiteSpaceStringArg()
     {
