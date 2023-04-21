@@ -33,7 +33,7 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = (CompilationUnitSyntax)await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
         if (root == null)
             return;
 
@@ -44,81 +44,43 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
         var declaration = root.FindNode(diagnosticSpan);
 
         var declarationKind = declaration.Kind();
-        switch (declarationKind)
+        if (declarationKind is SyntaxKind.LogicalNotExpression or SyntaxKind.EqualsExpression)
         {
-            case SyntaxKind.LogicalNotExpression:
-                var notExpression = (PrefixUnaryExpressionSyntax) declaration;
-                context.RegisterCodeFix(
-                    CodeAction.Create(
-                        title: CodeFixResources.SEC0001CodeFixTitle,
-                        createChangedDocument: ct => FixNotStringIsNullOrWhiteSpaceAsync(context.Document, notExpression, ct),
-                        equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)),
-                    diagnostic);
-                break;
-            case SyntaxKind.EqualsExpression:
-                var equalsExpression = (BinaryExpressionSyntax) declaration;
-                context.RegisterCodeFix(CodeAction.Create(
+            var notExpression = (ExpressionSyntax)declaration;
+            context.RegisterCodeFix(
+                CodeAction.Create(
                     title: CodeFixResources.SEC0001CodeFixTitle,
-                    createChangedDocument: ct => FixStringIsNullOrWhiteSpaceEqualsFalseAsync(context.Document, equalsExpression, ct),
-                    equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)
-                    ), diagnostic);
-                break;
+                    createChangedDocument: ct => Task.FromResult(
+                        ChangeStringIsNullOrWhiteSpaceToHasContent(root, context.Document, notExpression, ct)),
+                    equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)),
+                diagnostic);
         }
     }
 
-    private async Task<Document> FixStringIsNullOrWhiteSpaceEqualsFalseAsync(Document document, BinaryExpressionSyntax equalsExpression, CancellationToken ct)
+    private Document ChangeStringIsNullOrWhiteSpaceToHasContent(CompilationUnitSyntax rootNode, Document document, ExpressionSyntax stringIsNullOrWhiteSpaceExpression, CancellationToken ct)
     {
-        var invocation = equalsExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
-        var stringObjectToken =
-            (IdentifierNameSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
+        var invocation = stringIsNullOrWhiteSpaceExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
+        var stringArg = (ExpressionSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
+        var hasContentExpression = BuildStringHasContentNodes(stringArg);
 
-        var invocationExpression = BuildStringHasContentNodes(stringObjectToken);
-
-        var rootNode = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
-        rootNode = rootNode.ReplaceNode(equalsExpression, invocationExpression);
+        rootNode = rootNode.ReplaceNode(stringIsNullOrWhiteSpaceExpression, hasContentExpression);
 
         rootNode = UseStravaigExtensionsCore(rootNode);
 
         return document.WithSyntaxRoot(rootNode);
     }
 
-    private async Task<Document> FixNotStringIsNullOrWhiteSpaceAsync(Document document, PrefixUnaryExpressionSyntax notExpression, CancellationToken ct)
-    {
-        try
-        {
-            var rootNode = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(ct).ConfigureAwait(false);
-            var invocation = notExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
-            
-            var stringArg = (ExpressionSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
-            var hasContentExpression = BuildStringHasContentNodes(stringArg);
-            rootNode = rootNode.ReplaceNode(notExpression, hasContentExpression);
-
-            rootNode = UseStravaigExtensionsCore(rootNode);
-
-            return document.WithSyntaxRoot(rootNode);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine("It went horribly horribly wrong!");
-            Debug.WriteLine(ex);
-            throw;
-        }
-    }
-
     private CompilationUnitSyntax UseStravaigExtensionsCore(CompilationUnitSyntax oldRoot)
     {
-        SyntaxNode searchStart;
         SyntaxList<UsingDirectiveSyntax> usingDeclarations;
         if (oldRoot.Usings.Count != 0)
         {
-            searchStart = oldRoot;
             usingDeclarations = oldRoot.Usings;
         }
         else
         {
-            searchStart = GetNamespaceDeclaration(oldRoot);
-            // TODO: If no namespace??
-            usingDeclarations = ((BaseNamespaceDeclarationSyntax)searchStart).Usings;
+            var searchStart = GetNamespaceDeclaration(oldRoot);
+            usingDeclarations = searchStart?.Usings ?? oldRoot.Usings;
         }
 
         (bool usingExists, SyntaxNode insertBefore) = FindInsertionPoint(usingDeclarations);
@@ -126,12 +88,9 @@ public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
         if (usingExists)
             return oldRoot;
        
-        if (insertBefore != null)
-        {
-            return oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore());
-        }
-
-        return oldRoot.AddUsings(UsingStravaigExtensionsCore());
+        return insertBefore != null 
+            ? oldRoot.InsertNodesBefore(insertBefore, UsingStravaigExtensionsCore())
+            : oldRoot.AddUsings(UsingStravaigExtensionsCore());
     }
 
     private static BaseNamespaceDeclarationSyntax GetNamespaceDeclaration(CompilationUnitSyntax oldRoot)

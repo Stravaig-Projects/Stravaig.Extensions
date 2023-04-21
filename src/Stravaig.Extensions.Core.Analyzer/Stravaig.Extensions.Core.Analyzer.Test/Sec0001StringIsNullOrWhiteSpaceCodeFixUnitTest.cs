@@ -143,10 +143,6 @@ class MyClass
         return (someString.HasContent());
     }
 }";
-
-        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
-            .WithSpan(7, 17, 7, 55)
-            .WithArguments("someString");
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
@@ -177,10 +173,6 @@ class MyClass
         return (someString.HasContent());
     }
 }";
-        
-        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
-            .WithSpan(7, 17, 7, 55)
-            .WithArguments("someString");
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
@@ -215,69 +207,32 @@ class MyClass
     }
 }";
 
-        var diagnostic = new DiagnosticResult("SEC0001", DiagnosticSeverity.Warning)
-            .WithSpan(7, 17, 7, 55)
-            .WithArguments("someString");
         await VerifyCS
             .VerifyCodeFixAsync(test, fix);
     }
-    //    [Test]
-    //    public async Task StringIsNullOrWhiteSpaceStringArgEqualsFalseShouldActivateDiagnostic()
-    //    {
-    //        const string test = @"using System;
-    //namespace MyNamespace;
-    //class MyClass
-    //{
-    //    public bool MyMethod(string someString)
-    //    {
-    //        return (string.IsNullOrWhiteSpace(someString) == false);
-    //    }
-    //}";
 
-    //        var expected = VerifyCS
-    //            .Diagnostic("SEC0001")
-    //            .WithLocation(7, 17)
-    //            .WithArguments("someString");
-    //        await VerifyCS.VerifyAnalyzerAsync(test, expected);
-    //    }
+    [Test]
+    public async Task NoNamespaceUsingDeclarationPutAtTopOfFile()
+    {
+        const string test = @"class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return ([|!string.IsNullOrWhiteSpace(someString)|]);
+    }
+}";
 
-    //    [Test]
-    //    public async Task StringIsNullOrWhiteSpaceStringExpressionEqualsFalseShouldActivateDiagnostic()
-    //    {
-    //        const string test = @"using System;
-    //namespace MyNamespace;
-    //class MyClass
-    //{
-    //    public bool MyMethod(int aNumber)
-    //    {
-    //        return (string.IsNullOrWhiteSpace(aNumber.ToString()) == false);
-    //    }
-    //}";
+        const string fix = @"using Stravaig.Extensions.Core;
 
-    //        var expected = VerifyCS
-    //            .Diagnostic("SEC0001")
-    //            .WithLocation(7, 17)
-    //            .WithArguments("aNumber.ToString()");
-    //        await VerifyCS.VerifyAnalyzerAsync(test, expected);
-    //    }
+class MyClass
+{
+    public bool MyMethod(string someString)
+    {
+        return (someString.HasContent());
+    }
+}";
 
-    //    [Test]
-    //    public async Task NotStringIsNullOrWhiteSpaceStringExpressionShouldActivateDiagnostic()
-    //    {
-    //        const string test = @"using System;
-    //namespace MyNamespace;
-    //class MyClass
-    //{
-    //    public bool MyMethod(int aNumber)
-    //    {
-    //        return (!string.IsNullOrWhiteSpace(aNumber.ToString()));
-    //    }
-    //}";
-
-    //        var expected = VerifyCS
-    //            .Diagnostic("SEC0001")
-    //            .WithLocation(7, 17)
-    //            .WithArguments("aNumber.ToString()");
-    //        await VerifyCS.VerifyAnalyzerAsync(test, expected);
-    //    }
+        await VerifyCS
+            .VerifyCodeFixAsync(test, fix);
+    }
 }
