@@ -18,11 +18,12 @@ using Document = Microsoft.CodeAnalysis.Document;
 
 namespace Stravaig.Extensions.Core.Analyzer;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Sec0001UseStringHasContentAnalyzerCodeFixProvider)), Shared]
-public class Sec0001UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SEC0001_UseStringHasContentAnalyzerCodeFixProvider)), Shared]
+// ReSharper disable once InconsistentNaming
+public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 {
     private static readonly ImmutableArray<string> CachedFixableDiagnostics =
-        ImmutableArray.Create(Sec0001UseStringHasContentAnalyzer.DiagnosticId);
+        ImmutableArray.Create(SEC0001_UseStringHasContentAnalyzer.DiagnosticId);
     public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
 
     public sealed override FixAllProvider GetFixAllProvider()

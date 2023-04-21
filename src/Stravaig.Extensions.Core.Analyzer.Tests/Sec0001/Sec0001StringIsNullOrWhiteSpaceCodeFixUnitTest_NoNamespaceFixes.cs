@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
 using static Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
-    Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzer,
-    Stravaig.Extensions.Core.Analyzer.Sec0001UseStringHasContentAnalyzerCodeFixProvider>;
+    Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzer,
+    Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzerCodeFixProvider>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Test.Sec0001;
 

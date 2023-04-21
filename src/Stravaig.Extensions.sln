@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Package", "Stravaig.Extensions.Core.Analyzer.Package\Stravaig.Extensions.Core.Analyzer.Package.csproj", "{359B1A0F-4278-4FA7-BBC2-751A557351ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Test", "Stravaig.Extensions.Core.Analyzer.Tests\Stravaig.Extensions.Core.Analyzer.Tests.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Tests", "Stravaig.Extensions.Core.Analyzer.Tests\Stravaig.Extensions.Core.Analyzer.Tests.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Vsix", "Stravaig.Extensions.Core.Analyzer.Vsix\Stravaig.Extensions.Core.Analyzer.Vsix.csproj", "{0EAAA618-500A-4757-AE19-825BCCACEF35}"
 EndProject

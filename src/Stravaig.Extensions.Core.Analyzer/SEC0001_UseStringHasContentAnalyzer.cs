@@ -9,7 +9,8 @@ using System.Linq;
 namespace Stravaig.Extensions.Core.Analyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class Sec0001UseStringHasContentAnalyzer : DiagnosticAnalyzer
+    // ReSharper disable once InconsistentNaming
+    public class SEC0001_UseStringHasContentAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "SEC0001";
 
@@ -19,7 +20,13 @@ namespace Stravaig.Extensions.Core.Analyzer
         private const string Category = "Readability";
 
         private static readonly DiagnosticDescriptor Rule =
-            new (DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: Description);
+            new(DiagnosticId,
+                Title,
+                MessageFormat,
+                Category,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                description: Description);
 
         private static readonly ImmutableArray<DiagnosticDescriptor> CachedSupportedDiagnostics =
             ImmutableArray.Create(Rule);
