@@ -158,4 +158,4 @@ public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvide
         var invocationExpression = SyntaxFactory.InvocationExpression(simpleMemberAccessExpression);
         return invocationExpression;
     }
-} 
+}
