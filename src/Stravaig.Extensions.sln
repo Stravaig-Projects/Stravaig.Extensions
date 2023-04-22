@@ -35,8 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.CodeFixes", "Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj", "{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Package", "Stravaig.Extensions.Core.Analyzer.Package\Stravaig.Extensions.Core.Analyzer.Package.csproj", "{359B1A0F-4278-4FA7-BBC2-751A557351ED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Tests", "Stravaig.Extensions.Core.Analyzer.Tests\Stravaig.Extensions.Core.Analyzer.Tests.csproj", "{FC0838E7-305C-4B14-90B4-4607B54F0CAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravaig.Extensions.Core.Analyzer.Vsix", "Stravaig.Extensions.Core.Analyzer.Vsix\Stravaig.Extensions.Core.Analyzer.Vsix.csproj", "{0EAAA618-500A-4757-AE19-825BCCACEF35}"
@@ -65,10 +63,6 @@ Global
 		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{359B1A0F-4278-4FA7-BBC2-751A557351ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC0838E7-305C-4B14-90B4-4607B54F0CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,7 +78,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DD6CD7EF-2C0C-4618-A26C-A34E3FF7529C} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
 		{F3233BD3-8EF5-4CA8-BB1F-8EF98F057FEB} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
-		{359B1A0F-4278-4FA7-BBC2-751A557351ED} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
 		{FC0838E7-305C-4B14-90B4-4607B54F0CAD} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
 		{0EAAA618-500A-4757-AE19-825BCCACEF35} = {1AD1E780-48FA-450E-87D2-F656B89DEACC}
 	EndGlobalSection
