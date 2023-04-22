@@ -41,13 +41,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj" />
-        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" />
+        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" PrivateAssets="All" />
     </ItemGroup>
 
     <Target Name="DisplayMessages">
         <Message Text="Output Path = $(OutputPath)" Importance="high" />
-        <Message Text="Targets For Tfm Specific Content In Package = $(TargetsForTfmSpecificContentInPackage)" Important="high" />
+        <Message Text="Targets For Tfm Specific Content In Package = $(TargetsForTfmSpecificContentInPackage)" Importance="high" />
     </Target>
     
     <Target Name="_AddAnalyzersToOutput">
