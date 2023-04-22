@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -19,8 +19,10 @@
         <PackageIcon>stravaig-icon.png</PackageIcon>
         <PackageTags>extensions</PackageTags>
     </PropertyGroup>
+
     <ItemGroup>
         <None Include="stravaig-icon.png" Pack="true" PackagePath="/" />
+        <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <!-- Source link properties -->
@@ -35,5 +37,22 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj" />
+        <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" />
+    </ItemGroup>
+
+    <Target Name="DisplayMessages">
+        <Message Text="Output Path = $(OutputPath)" />
+        <Message Text="Targets For Tfm Specific Content In Package = $(TargetsForTfmSpecificContentInPackage)" />
+    </Target>
+    
+    <Target Name="_AddAnalyzersToOutput">
+        <ItemGroup>
+            <TfmSpecificPackageFile Include="$(OutputPath)\Stravaig.Extensions.Core.Analyzer.dll" PackagePath="analyzers/dotnet/cs" />
+            <TfmSpecificPackageFile Include="$(OutputPath)\Stravaig.Extensions.Core.Analyzer.CodeFixes.dll" PackagePath="analyzers/dotnet/cs" />
+        </ItemGroup>
+    </Target>
     
 </Project>
