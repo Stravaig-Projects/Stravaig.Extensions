@@ -1,28 +1,30 @@
-﻿namespace Example
-{
-    internal static class NotStringIsNullOrWhiteSpace
-    {
+﻿// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
-        internal static void GetInput()
-        {
-            // This method should be picked up by the Stravaig.Extensions.Core.Analyzer
-            // It should detect that
-            // !string.IsNullOrWhiteSpace(input)
-            // can be replaced by
-            // input.HasContent()
-            // It should also suggest the inclusion of the Stravaig.Extensions.Core namespace
-            Console.WriteLine("!string.IsNUllOrWhiteSpace");
-            Console.WriteLine("Type something and press Enter!");
-            Console.Write("> ");
-            string? input = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(input))
-            {
-                Console.WriteLine($"You inputted: {input}");
-            }
-            else
-            {
-                Console.WriteLine("You did not input anything.");
-            }
-        }
+using System.Diagnostics.CodeAnalysis;
+
+namespace Example;
+
+internal static class NotStringIsNullOrWhiteSpace
+{
+
+    [SuppressMessage("Readability", "SEC0001")]
+    internal static void GetInput()
+    {
+        // This method should be picked up by the Stravaig.Extensions.Core.Analyzer
+        // It should detect that
+        // !string.IsNullOrWhiteSpace(input)
+        // can be replaced by
+        // input.HasContent()
+        // It should also suggest the inclusion of the Stravaig.Extensions.Core namespace
+        Console.WriteLine("!string.IsNUllOrWhiteSpace");
+        Console.WriteLine("Type something and press Enter!");
+            
+        Console.Write("> ");
+        string? input = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(input))
+            Console.WriteLine($"You inputted: {input}");
+        else
+            Console.WriteLine("You did not input anything.");
+        
     }
 }
