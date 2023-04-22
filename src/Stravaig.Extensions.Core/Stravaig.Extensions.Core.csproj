@@ -18,11 +18,13 @@
         <RepositoryUrl>https://github.com/Stravaig-Projects/Stravaig.Extensions.Core</RepositoryUrl>
         <PackageIcon>stravaig-icon.png</PackageIcon>
         <PackageTags>extensions</PackageTags>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="docs/readme.md" Pack="true" PackagePath="/" />
         <None Include="stravaig-icon.png" Pack="true" PackagePath="/" />
-        <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
+        <None Update="tools/*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <!-- Source link properties -->
@@ -44,8 +46,8 @@
     </ItemGroup>
 
     <Target Name="DisplayMessages">
-        <Message Text="Output Path = $(OutputPath)" />
-        <Message Text="Targets For Tfm Specific Content In Package = $(TargetsForTfmSpecificContentInPackage)" />
+        <Message Text="Output Path = $(OutputPath)" Importance="high" />
+        <Message Text="Targets For Tfm Specific Content In Package = $(TargetsForTfmSpecificContentInPackage)" Important="high" />
     </Target>
     
     <Target Name="_AddAnalyzersToOutput">
