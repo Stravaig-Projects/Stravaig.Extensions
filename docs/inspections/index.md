@@ -7,6 +7,7 @@ There is normally nothing additional you need to do to get these to work, by ins
 ## IDE specific instructions
 
 * [JetBrains Rider](rider.md)
+* [Visual Studio](vs.md)
 * [Visual Studio for Mac](vs-for-mac.md)
 
 ## .editorconfig file
