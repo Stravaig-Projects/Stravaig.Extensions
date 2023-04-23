@@ -28,13 +28,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Copy Analyser docs
+        shell: pwsh
+        run: Copy-Item -Path src\Stravaig.Extensions.Core.Analyzer\docs\reference\*.* -Destination docs\analysers -Force
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./docs/
           destination: ./_site
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 

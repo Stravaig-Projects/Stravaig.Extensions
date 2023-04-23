@@ -4,9 +4,9 @@
 
 Date: ???
 
-### Bugs
-
 ### Features
+
+- #49: Add an analyser and code fix for detecting the use of `!string.IsNullOrWhiteSpace()` and suggesting the use of the `.HasContent()` extension method instead to improve code readability.
 
 ### Miscellaneous
 

@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <YEAR>$([System.DateTime]::Now.Year)</YEAR>
+    <Title>Stravaig Core Extension Analyzers</Title>
+    <Copyright>©$(YEAR) Colin Angus Mackay. See licence for more information.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageId>Stravaig.Extensions.Core.Analyzer</PackageId>
+    <Authors>Colin Angus Mackay</Authors>
+    <PackageProjectUrl>https://github.com/Stravaig-Projects/Stravaig.Extensions.Core/blob/main/README.md</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Stravaig-Projects/Stravaig.Extensions.Core</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Analyzers for the Stravaig.Extensions.Core package</Description>
+    <PackageTags>Stravaig.Extensions.Core, analyzers, code-fixes</PackageTags>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <PackageIcon>stravaig-icon.png</PackageIcon>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer.CodeFixes\Stravaig.Extensions.Core.Analyzer.CodeFixes.csproj" />
+    <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tools\*.ps1" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="" />
+    <None Update="stravaig-icon.png">
+      <Pack>true</Pack>
+      <PackagePath>/</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_AddAnalyzersToOutput">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\Stravaig.Extensions.Core.Analyzer.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Stravaig.Extensions.Core.Analyzer.CodeFixes.dll" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>

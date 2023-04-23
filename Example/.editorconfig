@@ -1,0 +1,2 @@
+[*.cs]
+dotnet_diagnostic.sec0001.severity = warning
