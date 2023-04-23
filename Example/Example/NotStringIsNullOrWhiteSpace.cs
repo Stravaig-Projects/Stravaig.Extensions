@@ -6,8 +6,6 @@ namespace Example;
 
 internal static class NotStringIsNullOrWhiteSpace
 {
-
-    [SuppressMessage("Readability", "SEC0001")]
     internal static void GetInput()
     {
         // This method should be picked up by the Stravaig.Extensions.Core.Analyzer

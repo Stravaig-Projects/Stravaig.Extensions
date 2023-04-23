@@ -1,7 +1,7 @@
 # Documentation
 
 * [Extensions](v0.x/index.md)
-* [How to use the analysers and codefixes](code-fixes/index.md)
+* [How to use the analysers and codefixes](inspections/index.md)
 
 ## Project details
 
