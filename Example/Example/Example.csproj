@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stravaig.Extensions.Core" Version="0.1.1-preview.113" />
+    <PackageReference Include="Stravaig.Extensions.Core" Version="0.1.1" />
   </ItemGroup>
 
 </Project>

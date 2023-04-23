@@ -1,6 +1,6 @@
 # Inspections & Code Fixes with Visual Studio
 
-Note: If you have JetBrains ReSharper see [below](#If+You+Have+JetBrains+ReSharper+Installed).
+Note: If you have JetBrains ReSharper see [below](#if-you-have-jetbrains-resharper-installed).
 
 ![Screenshot of Visual Studio showing the analyser underlining the affected code and a menu popup showing with the code fix](vs-full-screen.png)
 
