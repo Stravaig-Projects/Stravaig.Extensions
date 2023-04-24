@@ -65,3 +65,6 @@ Visual Studio for Mac will also include a `Justification` argument to the attrib
 
 You can also move the attribute to the class scope if you want to suppress it for the whole class and not just a specific method.
 
+---
+
+The screenshots apply to Visual Studio for Mac v17.5.3
