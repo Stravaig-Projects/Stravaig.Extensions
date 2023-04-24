@@ -1,4 +1,7 @@
 
+# Update analyser docs
+Copy-Item -Path src\Stravaig.Extensions.Core.Analyzer\docs\reference\*.* -Destination docs\analysers -Force
+
 # Fix up the contributions for the docs.
 $contrib = Get-Content "$PSScriptRoot/contributors.md"
 for ($i = 0; $i -lt $contrib.Count; $i++) {
