@@ -8,6 +8,8 @@ Date: ???
 
 ### Features
 
+- #56: Add analysers for string.Compare(...) 
+
 ### Miscellaneous
 
 - #46: Fix the contributions page in the documentation

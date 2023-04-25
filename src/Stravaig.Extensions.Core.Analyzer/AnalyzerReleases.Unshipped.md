@@ -3,5 +3,6 @@
 
 ### New Rules
 
-Rule ID | Category | Severity | Notes
---------|----------|----------|--------------------
+| Rule ID | Category    | Severity | Notes                                                  |
+|---------|-------------|----------|--------------------------------------------------------|
+| SEC0011 | Readability | Warning  | SEC0011_ReplaceStringCompareAnalyzer [Documentation]() |
