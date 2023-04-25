@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.Testing;
 using NUnit.Framework;
 using static Stravaig.Extensions.Core.Analyzer.Test.CSharpAnalyzerVerifier<Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzer>;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test.Sec0001;
+namespace Stravaig.Extensions.Core.Analyzer.Tests.Sec0001;
 
 [TestFixture]
 public partial class Sec0001StringIsNullOrWhiteSpaceAnalyzerUnitTest

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Stravaig.Extensions.Core.Analyzer\Stravaig.Extensions.Core.Analyzer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sec0011\" />
+  </ItemGroup>
+
 </Project>

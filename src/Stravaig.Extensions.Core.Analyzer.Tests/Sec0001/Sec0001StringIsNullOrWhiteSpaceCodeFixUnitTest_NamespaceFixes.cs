@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 using static Stravaig.Extensions.Core.Analyzer.Test.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzer,
     Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzerCodeFixProvider>;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test.Sec0001;
+namespace Stravaig.Extensions.Core.Analyzer.Tests.Sec0001;
 
 [TestFixture]
 public partial class Sec0001StringIsNullOrWhiteSpaceCodeFixUnitTest
