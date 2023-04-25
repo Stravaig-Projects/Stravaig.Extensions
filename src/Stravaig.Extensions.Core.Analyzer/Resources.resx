@@ -133,10 +133,10 @@
     <value>String can be compared with .IsBefore()</value>
   </data>
   <data name="SEC0002_Description" xml:space="preserve">
-    <value>"string.Compare(...) &lt; 0" should be replaced with ".IsBefore(...)"</value>
+    <value>"string.Compare(...) &lt; 0" should be replaced with ".IsBefore(...)".</value>
   </data>
   <data name="SEC0002_MessageFormat" xml:space="preserve">
-    <value>"string.Compare({0}, {1}, {2}) &lt; 0" can be replaced with "{0}.IsBefore({1}, {2})"</value>
+    <value>"string.Compare({0}, {1}, {2}) &lt; 0" can be replaced with "{0}.IsBefore({1}, {2})".</value>
     <comment>0 = LHS, 1 = RHS; 2 = StringComparison</comment>
   </data>
 </root>

@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Stravaig.Extensions.Core.Analyzer;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class SEC0002_UseStringIsAfterAnalyzer : DiagnosticAnalyzer
+public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
 {
-    public const string BeforeDiagnosticId = "SEC0002";
-    public const string BeforeOrEqualDiagnosticId = "SEC0003";
-    public const string AfterOrEqualDiagnosticId = "SEC0004";
-    public const string AfterDiagnosticId = "SEC0005";
+    public const string BeforeDiagnosticId = "SEC0011";
+    public const string BeforeOrEqualDiagnosticId = "SEC0012";
+    public const string AfterOrEqualDiagnosticId = "SEC0013";
+    public const string AfterDiagnosticId = "SEC0014";
 
     private const string Category = "Readability";
 
@@ -27,8 +30,6 @@ public class SEC0002_UseStringIsAfterAnalyzer : DiagnosticAnalyzer
 
     public override void Initialize(AnalysisContext context)
     {
-        string lhs = null, rhs = null;
-        if (string.Compare(lhs, rhs, StringComparison.OrdinalIgnoreCase) > 0) { }
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
 
@@ -42,7 +43,42 @@ public class SEC0002_UseStringIsAfterAnalyzer : DiagnosticAnalyzer
 
     private void AnalyzeNode(SyntaxNodeAnalysisContext context)
     {
-        switch (context.Node.Kind())
+        string lhs = null, rhs = null;
+        if (string.Compare(lhs, rhs, StringComparison.OrdinalIgnoreCase) > 0) { }
+
+        
+        var binaryExpression = (BinaryExpressionSyntax) context.Node;
+        if (!binaryExpression.Left.IsKind(SyntaxKind.InvocationExpression))
+            return;
+        if (!binaryExpression.Right.IsKind(SyntaxKind.NumericLiteralExpression))
+            return;
+
+        var left = (InvocationExpressionSyntax)binaryExpression.Left;
+        var smaExpression = left.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
+        if (smaExpression == null || smaExpression.Name.Identifier.Text != nameof(string.Compare))
+            return;
+
+        if (left.ArgumentList.Arguments.Count != 3)
+            return;
+        
+        // TODO: We need some semantic analysis to figure out that the arguments are of the right type.
+        var semanticModel = context.SemanticModel;
+        var argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[0]);
+        if (argType.Type?.Name != nameof(String))
+            return;
+        
+        argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[1]);
+        if (argType.Type?.Name != nameof(String))
+            return;
+        
+        argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[2]);
+        if (argType.Type?.Name != nameof(StringComparison))
+            return;
+
+        
+        //left.ArgumentList.Arguments[0].
+
+        switch (binaryExpression.Kind())
         {
             case SyntaxKind.GreaterThanExpression:
             case SyntaxKind.GreaterThanOrEqualExpression:
