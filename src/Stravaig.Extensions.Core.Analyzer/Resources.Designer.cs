@@ -79,11 +79,38 @@ namespace Stravaig.Extensions.Core.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String &apos;{0}&apos; can be checked with .HasContent().
+        ///   Looks up a localized string similar to String &apos;{0}&apos; can be checked with {0}.HasContent().
         /// </summary>
         internal static string SEC0001_MessageFormat {
             get {
                 return ResourceManager.GetString("SEC0001_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String can be compared with .IsBefore().
+        /// </summary>
+        internal static string SEC0002_AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("SEC0002_AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare(...) &lt; 0&quot; should be replaced with &quot;.IsBefore(...)&quot;.
+        /// </summary>
+        internal static string SEC0002_Description {
+            get {
+                return ResourceManager.GetString("SEC0002_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare({0}, {1}, {2}) &lt; 0&quot; can be replaced with &quot;{0}.IsBefore({1}, {2})&quot;.
+        /// </summary>
+        internal static string SEC0002_MessageFormat {
+            get {
+                return ResourceManager.GetString("SEC0002_MessageFormat", resourceCulture);
             }
         }
     }
