@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test
+namespace Stravaig.Extensions.Core.Analyzer.Tests
 {
     public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         where TAnalyzer : DiagnosticAnalyzer, new()

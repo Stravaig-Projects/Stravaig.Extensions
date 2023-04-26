@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using NUnit.Framework;
-using static Stravaig.Extensions.Core.Analyzer.Test.CSharpAnalyzerVerifier<Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzer>;
+using static Stravaig.Extensions.Core.Analyzer.Tests.CSharpAnalyzerVerifier<Stravaig.Extensions.Core.Analyzer.SEC0001_UseStringHasContentAnalyzer>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Tests.Sec0001;
 

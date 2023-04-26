@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test
+namespace Stravaig.Extensions.Core.Analyzer.Tests
 {
     public static partial class CSharpCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()

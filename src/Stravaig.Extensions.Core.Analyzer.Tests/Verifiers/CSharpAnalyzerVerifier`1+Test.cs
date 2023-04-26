@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
-namespace Stravaig.Extensions.Core.Analyzer.Test
+namespace Stravaig.Extensions.Core.Analyzer.Tests
 {
     public static partial class CSharpAnalyzerVerifier<TAnalyzer>
         where TAnalyzer : DiagnosticAnalyzer, new()
