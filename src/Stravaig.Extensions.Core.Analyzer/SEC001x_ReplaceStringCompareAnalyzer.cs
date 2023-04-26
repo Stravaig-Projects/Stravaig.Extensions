@@ -22,23 +22,40 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor BeforeRule =
         new(BeforeDiagnosticId,
-            new LocalizableResourceString(nameof(Resources.SEC0011_AnalyzerTitle), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.SEC0011_MessageFormat), Resources.ResourceManager, typeof(Resources)),
+            Localise.Resource(nameof(Resources.SEC0011_AnalyzerTitle)),
+            Localise.Resource(nameof(Resources.SEC0011_MessageFormat)),
             Category,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
-            description: new LocalizableResourceString(nameof(Resources.SEC0011_Description), Resources.ResourceManager, typeof(Resources)));
+            description: Localise.Resource(nameof(Resources.SEC0011_Description)));
 
     private static readonly DiagnosticDescriptor BeforeOrEqualRule =
         new(BeforeOrEqualDiagnosticId,
-            new LocalizableResourceString(nameof(Resources.SEC0012_AnalyzerTitle), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.SEC0012_MessageFormat), Resources.ResourceManager, typeof(Resources)),
+            Localise.Resource(nameof(Resources.SEC0012_AnalyzerTitle)),
+            Localise.Resource(nameof(Resources.SEC0012_MessageFormat)),
             Category,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
-            description: new LocalizableResourceString(nameof(Resources.SEC0012_Description), Resources.ResourceManager, typeof(Resources)));
+            description: Localise.Resource(nameof(Resources.SEC0012_Description)));
 
-    
+    private static readonly DiagnosticDescriptor AfterOrEqualRule =
+        new(AfterOrEqualDiagnosticId,
+            Localise.Resource(nameof(Resources.SEC0013_AnalyzerTitle)),
+            Localise.Resource(nameof(Resources.SEC0013_MessageFormat)),
+            Category,
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            description: Localise.Resource(nameof(Resources.SEC0013_Description)));
+
+    private static readonly DiagnosticDescriptor AfterRule =
+        new(AfterDiagnosticId,
+            Localise.Resource(nameof(Resources.SEC0014_AnalyzerTitle)),
+            Localise.Resource(nameof(Resources.SEC0014_MessageFormat)),
+            Category,
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            description: Localise.Resource(nameof(Resources.SEC0014_Description)));
+
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -92,7 +109,11 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         switch (binaryExpression.Kind())
         {
             case SyntaxKind.GreaterThanExpression:
+                rule = AfterRule;
+                break;
             case SyntaxKind.GreaterThanOrEqualExpression:
+                rule = AfterOrEqualRule;
+                break;
             case SyntaxKind.LessThanExpression:
                 rule = BeforeRule;
                 break;
@@ -112,7 +133,7 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
     }
 
     private static readonly ImmutableArray<DiagnosticDescriptor> CachedSupportedDiagnostics =
-        ImmutableArray.Create(BeforeRule, BeforeOrEqualRule);
+        ImmutableArray.Create(BeforeRule, BeforeOrEqualRule, AfterOrEqualRule, AfterRule);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => CachedSupportedDiagnostics;
 }
