@@ -129,14 +129,24 @@
     <value>String '{0}' can be checked with {0}.HasContent()</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
-  <data name="SEC0002_AnalyzerTitle" xml:space="preserve">
+  <data name="SEC0011_AnalyzerTitle" xml:space="preserve">
     <value>String can be compared with .IsBefore()</value>
   </data>
-  <data name="SEC0002_Description" xml:space="preserve">
+  <data name="SEC0011_Description" xml:space="preserve">
     <value>"string.Compare(...) &lt; 0" should be replaced with ".IsBefore(...)".</value>
   </data>
-  <data name="SEC0002_MessageFormat" xml:space="preserve">
+  <data name="SEC0011_MessageFormat" xml:space="preserve">
     <value>"string.Compare({0}, {1}, {2}) &lt; 0" can be replaced with "{0}.IsBefore({1}, {2})".</value>
+    <comment>0 = LHS, 1 = RHS; 2 = StringComparison</comment>
+  </data>
+  <data name="SEC0012_AnalyzerTitle" xml:space="preserve">
+    <value>String can be compared with .IsBeforeOrEqualTo()</value>
+  </data>
+  <data name="SEC0012_Description" xml:space="preserve">
+    <value>"string.Compare(...) &lt;= 0" should be replaced with ".IsBeforeOrEqualTo(...)".</value>
+  </data>
+  <data name="SEC0012_MessageFormat" xml:space="preserve">
+    <value>"string.Compare({0}, {1}, {2}) &lt; 0" can be replaced with "{0}.IsBeforeOrEqualTo({1}, {2})".</value>
     <comment>0 = LHS, 1 = RHS; 2 = StringComparison</comment>
   </data>
 </root>

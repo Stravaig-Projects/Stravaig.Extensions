@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.CodeAnalysis;
@@ -21,13 +22,23 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor BeforeRule =
         new(BeforeDiagnosticId,
-            new LocalizableResourceString(nameof(Resources.SEC0002_AnalyzerTitle), Resources.ResourceManager, typeof(Resources)),
-            new LocalizableResourceString(nameof(Resources.SEC0002_MessageFormat), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.SEC0011_AnalyzerTitle), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.SEC0011_MessageFormat), Resources.ResourceManager, typeof(Resources)),
             Category,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
-            description: new LocalizableResourceString(nameof(Resources.SEC0002_Description), Resources.ResourceManager, typeof(Resources)));
+            description: new LocalizableResourceString(nameof(Resources.SEC0011_Description), Resources.ResourceManager, typeof(Resources)));
 
+    private static readonly DiagnosticDescriptor BeforeOrEqualRule =
+        new(BeforeOrEqualDiagnosticId,
+            new LocalizableResourceString(nameof(Resources.SEC0012_AnalyzerTitle), Resources.ResourceManager, typeof(Resources)),
+            new LocalizableResourceString(nameof(Resources.SEC0012_MessageFormat), Resources.ResourceManager, typeof(Resources)),
+            Category,
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            description: new LocalizableResourceString(nameof(Resources.SEC0012_Description), Resources.ResourceManager, typeof(Resources)));
+
+    
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -45,7 +56,6 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
     {
         string lhs = null, rhs = null;
         if (string.Compare(lhs, rhs, StringComparison.OrdinalIgnoreCase) > 0) { }
-
         
         var binaryExpression = (BinaryExpressionSyntax) context.Node;
         if (!binaryExpression.Left.IsKind(SyntaxKind.InvocationExpression))
@@ -61,7 +71,6 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         if (left.ArgumentList.Arguments.Count != 3)
             return;
         
-        // TODO: We need some semantic analysis to figure out that the arguments are of the right type.
         var semanticModel = context.SemanticModel;
         var argLhs = left.ArgumentList.Arguments[0];
         var argType = semanticModel.GetTypeInfo(argLhs.Expression);
@@ -78,28 +87,32 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         if (argType.Type?.Name != nameof(StringComparison))
             return;
 
-        
-        //left.ArgumentList.Arguments[0].
 
+        DiagnosticDescriptor rule = null;
         switch (binaryExpression.Kind())
         {
             case SyntaxKind.GreaterThanExpression:
             case SyntaxKind.GreaterThanOrEqualExpression:
             case SyntaxKind.LessThanExpression:
-            case SyntaxKind.LessThanOrEqualExpression:
+                rule = BeforeRule;
                 break;
-            default:
-                return;
+            case SyntaxKind.LessThanOrEqualExpression:
+                rule = BeforeOrEqualRule;
+                break;
         }
+
+        if (rule == null)
+            return;
+
         string lhsText = argLhs.GetText().ToString(),
             rhsText = argRhs.GetText().ToString(),
             comparisonText = argComparison.GetText().ToString();
-        var diagnostic = Diagnostic.Create(BeforeRule, context.Node.GetLocation(), lhsText, rhsText, comparisonText);
+        var diagnostic = Diagnostic.Create(rule, context.Node.GetLocation(), lhsText, rhsText, comparisonText);
         context.ReportDiagnostic(diagnostic);
     }
 
     private static readonly ImmutableArray<DiagnosticDescriptor> CachedSupportedDiagnostics =
-        ImmutableArray.Create(BeforeRule);
+        ImmutableArray.Create(BeforeRule, BeforeOrEqualRule);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => CachedSupportedDiagnostics;
 }
