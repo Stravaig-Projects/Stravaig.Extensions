@@ -63,15 +63,18 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         
         // TODO: We need some semantic analysis to figure out that the arguments are of the right type.
         var semanticModel = context.SemanticModel;
-        var argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[0]);
+        var argLhs = left.ArgumentList.Arguments[0];
+        var argType = semanticModel.GetTypeInfo(argLhs.Expression);
         if (argType.Type?.Name != nameof(String))
             return;
-        
-        argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[1]);
+
+        var argRhs = left.ArgumentList.Arguments[1];
+        argType = semanticModel.GetTypeInfo(argRhs.Expression);
         if (argType.Type?.Name != nameof(String))
             return;
-        
-        argType = semanticModel.GetTypeInfo(left.ArgumentList.Arguments[2]);
+
+        var argComparison = left.ArgumentList.Arguments[2];
+        argType = semanticModel.GetTypeInfo(argComparison.Expression);
         if (argType.Type?.Name != nameof(StringComparison))
             return;
 
@@ -88,7 +91,9 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
             default:
                 return;
         }
-        string lhsText = "", rhsText = "", comparisonText = "";
+        string lhsText = argLhs.GetText().ToString(),
+            rhsText = argRhs.GetText().ToString(),
+            comparisonText = argComparison.GetText().ToString();
         var diagnostic = Diagnostic.Create(BeforeRule, context.Node.GetLocation(), lhsText, rhsText, comparisonText);
         context.ReportDiagnostic(diagnostic);
     }
