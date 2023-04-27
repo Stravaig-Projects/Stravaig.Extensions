@@ -68,5 +68,41 @@ namespace Stravaig.Extensions.Core.Analyzer {
                 return ResourceManager.GetString("SEC0001CodeFixTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with .IsBefore().
+        /// </summary>
+        internal static string SEC0011CodeFixTitle {
+            get {
+                return ResourceManager.GetString("SEC0011CodeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with .IsBeforeOrEqualTo().
+        /// </summary>
+        internal static string SEC0012CodeFixTitle {
+            get {
+                return ResourceManager.GetString("SEC0012CodeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with .IsAfterOrEqualTo().
+        /// </summary>
+        internal static string SEC0013CodeFixTitle {
+            get {
+                return ResourceManager.GetString("SEC0013CodeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace with .IsAfter().
+        /// </summary>
+        internal static string SEC0014CodeFixTitle {
+            get {
+                return ResourceManager.GetString("SEC0014CodeFixTitle", resourceCulture);
+            }
+        }
     }
 }

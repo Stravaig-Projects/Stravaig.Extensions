@@ -71,9 +71,6 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
 
     private void AnalyzeNode(SyntaxNodeAnalysisContext context)
     {
-        string lhs = null, rhs = null;
-        if (string.Compare(lhs, rhs, StringComparison.OrdinalIgnoreCase) > 0) { }
-        
         var binaryExpression = (BinaryExpressionSyntax) context.Node;
         if (!binaryExpression.Left.IsKind(SyntaxKind.InvocationExpression))
             return;

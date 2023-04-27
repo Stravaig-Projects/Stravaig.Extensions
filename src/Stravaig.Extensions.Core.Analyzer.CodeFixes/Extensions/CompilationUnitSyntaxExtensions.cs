@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Linq;
 using System;
 
-namespace Stravaig.Extensions.Core.Analyzer;
+namespace Stravaig.Extensions.Core.Analyzer.Extensions;
 
 public static class CompilationUnitSyntaxExtensions
 {

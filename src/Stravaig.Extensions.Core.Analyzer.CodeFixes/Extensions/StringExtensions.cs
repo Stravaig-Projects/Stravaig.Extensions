@@ -1,6 +1,6 @@
 using System;
 
-namespace Stravaig.Extensions.Core.Analyzer;
+namespace Stravaig.Extensions.Core.Analyzer.Extensions;
 
 internal static class StringExtensions
 {

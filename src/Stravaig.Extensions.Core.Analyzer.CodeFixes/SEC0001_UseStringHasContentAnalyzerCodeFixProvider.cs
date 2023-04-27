@@ -3,9 +3,13 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Stravaig.Extensions.Core.Analyzer.Extensions;
+using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Document = Microsoft.CodeAnalysis.Document;
 
@@ -27,7 +31,7 @@ public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvide
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = (CompilationUnitSyntax)await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context.GetCompilationRootAsync();
         if (root == null)
             return;
 
