@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            CompareStrings.IsAAfterB();
+            CompareStrings.Compare();
         }
     }
 }
