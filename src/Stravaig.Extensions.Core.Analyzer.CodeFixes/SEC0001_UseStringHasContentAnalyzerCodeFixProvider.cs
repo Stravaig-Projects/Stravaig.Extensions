@@ -4,12 +4,9 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Stravaig.Extensions.Core.Analyzer.Extensions;
-using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Document = Microsoft.CodeAnalysis.Document;
 
@@ -48,7 +45,7 @@ public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvide
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: CodeFixResources.SEC0001CodeFixTitle,
-                    createChangedDocument: ct => Task.FromResult(
+                    createChangedDocument: _ => Task.FromResult(
                         ChangeStringIsNullOrWhiteSpaceToHasContent(root, context.Document, notExpression)),
                     equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)),
                 diagnostic);

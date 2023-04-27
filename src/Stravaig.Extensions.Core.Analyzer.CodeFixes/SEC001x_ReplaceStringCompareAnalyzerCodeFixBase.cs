@@ -38,7 +38,7 @@ public abstract class SEC001x_ReplaceStringCompareAnalyzerCodeFixBase : CodeFixP
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: Title,
-                createChangedDocument: ct => Task.FromResult(
+                createChangedDocument: _ => Task.FromResult(
                     ReplaceCode(root, context.Document, expression)),
                 equivalenceKey: EquivalenceKey),
             diagnostic);
@@ -65,7 +65,6 @@ public abstract class SEC001x_ReplaceStringCompareAnalyzerCodeFixBase : CodeFixP
         BinaryExpressionSyntax binaryExpression)
     {
         var left = (InvocationExpressionSyntax)binaryExpression.Left;
-        var smaExpression = left.ChildNodes().OfType<MemberAccessExpressionSyntax>().FirstOrDefault();
         var argLhs = left.ArgumentList.Arguments[0].Expression;
         var argRhs = left.ArgumentList.Arguments[1].Expression;
         var argComparison = left.ArgumentList.Arguments[2].Expression;
