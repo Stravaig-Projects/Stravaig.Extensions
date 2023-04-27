@@ -1,4 +1,5 @@
-﻿using Stravaig.Extensions.Core;
+﻿// ReSharper disable All
+using Stravaig.Extensions.Core;
 
 namespace Example
 {

@@ -1,5 +1,4 @@
-﻿// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
-
+﻿// ReSharper disable All
 namespace Example;
 
 internal static class NotStringIsNullOrWhiteSpace
@@ -21,6 +20,5 @@ internal static class NotStringIsNullOrWhiteSpace
             Console.WriteLine($"You inputted: {input}");
         else
             Console.WriteLine("You did not input anything.");
-        
     }
 }
