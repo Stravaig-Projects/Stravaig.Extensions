@@ -9,20 +9,18 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Stravaig.Extensions.Core.Analyzer;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
+public class Sec001XReplaceStringCompareAnalyzer : DiagnosticAnalyzer
 {
     public const string BeforeDiagnosticId = "SEC0011";
     public const string BeforeOrEqualDiagnosticId = "SEC0012";
     public const string AfterOrEqualDiagnosticId = "SEC0013";
     public const string AfterDiagnosticId = "SEC0014";
 
-    private const string Category = "Readability";
-
     private static readonly DiagnosticDescriptor BeforeRule =
         new(BeforeDiagnosticId,
             Localise.Resource(nameof(Resources.SEC0011_AnalyzerTitle)),
             Localise.Resource(nameof(Resources.SEC0011_MessageFormat)),
-            Category,
+            Category.Readability,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Localise.Resource(nameof(Resources.SEC0011_Description)));
@@ -31,7 +29,7 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         new(BeforeOrEqualDiagnosticId,
             Localise.Resource(nameof(Resources.SEC0012_AnalyzerTitle)),
             Localise.Resource(nameof(Resources.SEC0012_MessageFormat)),
-            Category,
+            Category.Readability,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Localise.Resource(nameof(Resources.SEC0012_Description)));
@@ -40,7 +38,7 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         new(AfterOrEqualDiagnosticId,
             Localise.Resource(nameof(Resources.SEC0013_AnalyzerTitle)),
             Localise.Resource(nameof(Resources.SEC0013_MessageFormat)),
-            Category,
+            Category.Readability,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Localise.Resource(nameof(Resources.SEC0013_Description)));
@@ -49,7 +47,7 @@ public class SEC001x_ReplaceStringCompareAnalyzer : DiagnosticAnalyzer
         new(AfterDiagnosticId,
             Localise.Resource(nameof(Resources.SEC0014_AnalyzerTitle)),
             Localise.Resource(nameof(Resources.SEC0014_MessageFormat)),
-            Category,
+            Category.Readability,
             DiagnosticSeverity.Warning,
             isEnabledByDefault: true,
             description: Localise.Resource(nameof(Resources.SEC0014_Description)));

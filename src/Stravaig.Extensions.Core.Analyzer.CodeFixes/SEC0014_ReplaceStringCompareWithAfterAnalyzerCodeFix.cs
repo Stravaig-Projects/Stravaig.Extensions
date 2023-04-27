@@ -9,7 +9,7 @@ namespace Stravaig.Extensions.Core.Analyzer;
 public class SEC0014_ReplaceStringCompareWithAfterAnalyzerCodeFix : SEC001x_ReplaceStringCompareAnalyzerCodeFixBase
 {
     private static readonly ImmutableArray<string> CachedFixableDiagnostics =
-        ImmutableArray.Create(SEC001x_ReplaceStringCompareAnalyzer.AfterDiagnosticId);
+        ImmutableArray.Create(Sec001XReplaceStringCompareAnalyzer.AfterDiagnosticId);
     public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
     protected override string Title => CodeFixResources.SEC0014CodeFixTitle;
     protected override string ReplacementCall => "IsAfter";

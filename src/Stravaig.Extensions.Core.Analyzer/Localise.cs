@@ -2,9 +2,9 @@
 
 namespace Stravaig.Extensions.Core.Analyzer;
 
-public static class Localise
+internal static class Localise
 {
-    public static LocalizableResourceString Resource(string name)
+    internal static LocalizableResourceString Resource(string name)
     {
         return new LocalizableResourceString(name, Resources.ResourceManager, typeof(Resources));
     }

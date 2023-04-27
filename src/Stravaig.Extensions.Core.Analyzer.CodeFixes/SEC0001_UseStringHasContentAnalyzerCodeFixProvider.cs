@@ -17,7 +17,7 @@ namespace Stravaig.Extensions.Core.Analyzer;
 public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvider
 {
     private static readonly ImmutableArray<string> CachedFixableDiagnostics =
-        ImmutableArray.Create(SEC0001_UseStringHasContentAnalyzer.DiagnosticId);
+        ImmutableArray.Create(Sec0001UseStringHasContentAnalyzer.DiagnosticId);
     public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
 
     public sealed override FixAllProvider GetFixAllProvider()

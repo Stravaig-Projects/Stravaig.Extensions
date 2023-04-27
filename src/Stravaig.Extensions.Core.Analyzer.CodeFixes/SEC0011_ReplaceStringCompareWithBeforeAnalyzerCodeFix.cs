@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 
@@ -9,7 +10,7 @@ namespace Stravaig.Extensions.Core.Analyzer;
 public class SEC0011_ReplaceStringCompareWithBeforeAnalyzerCodeFix : SEC001x_ReplaceStringCompareAnalyzerCodeFixBase
 {
     private static readonly ImmutableArray<string> CachedFixableDiagnostics =
-        ImmutableArray.Create(SEC001x_ReplaceStringCompareAnalyzer.BeforeDiagnosticId);
+        ImmutableArray.Create(Sec001XReplaceStringCompareAnalyzer.BeforeDiagnosticId);
     public sealed override ImmutableArray<string> FixableDiagnosticIds => CachedFixableDiagnostics;
     protected override string Title => CodeFixResources.SEC0011CodeFixTitle;
     protected override string ReplacementCall => "IsBefore";
