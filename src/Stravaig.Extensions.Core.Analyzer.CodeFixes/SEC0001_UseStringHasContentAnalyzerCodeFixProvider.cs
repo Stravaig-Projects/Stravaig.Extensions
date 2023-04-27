@@ -3,11 +3,9 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Document = Microsoft.CodeAnalysis.Document;
 
@@ -47,13 +45,13 @@ public class SEC0001_UseStringHasContentAnalyzerCodeFixProvider : CodeFixProvide
                 CodeAction.Create(
                     title: CodeFixResources.SEC0001CodeFixTitle,
                     createChangedDocument: ct => Task.FromResult(
-                        ChangeStringIsNullOrWhiteSpaceToHasContent(root, context.Document, notExpression, ct)),
+                        ChangeStringIsNullOrWhiteSpaceToHasContent(root, context.Document, notExpression)),
                     equivalenceKey: nameof(CodeFixResources.SEC0001CodeFixTitle)),
                 diagnostic);
         }
     }
 
-    private Document ChangeStringIsNullOrWhiteSpaceToHasContent(CompilationUnitSyntax rootNode, Document document, ExpressionSyntax stringIsNullOrWhiteSpaceExpression, CancellationToken ct)
+    private Document ChangeStringIsNullOrWhiteSpaceToHasContent(CompilationUnitSyntax rootNode, Document document, ExpressionSyntax stringIsNullOrWhiteSpaceExpression)
     {
         var invocation = stringIsNullOrWhiteSpaceExpression.ChildNodes().OfType<InvocationExpressionSyntax>().First();
         var stringArg = (ExpressionSyntax)invocation.ArgumentList.Arguments.First().ChildNodes().First();
