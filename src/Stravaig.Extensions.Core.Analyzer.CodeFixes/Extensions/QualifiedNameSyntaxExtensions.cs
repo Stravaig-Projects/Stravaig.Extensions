@@ -1,7 +1,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Stravaig.Extensions.Core.Analyzer;
+namespace Stravaig.Extensions.Core.Analyzer.Extensions;
 
 public static class QualifiedNameSyntaxExtensions
 {

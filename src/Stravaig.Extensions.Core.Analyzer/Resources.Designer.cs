@@ -79,11 +79,119 @@ namespace Stravaig.Extensions.Core.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String &apos;{0}&apos; can be checked with .HasContent().
+        ///   Looks up a localized string similar to String &apos;{0}&apos; can be checked with {0}.HasContent().
         /// </summary>
         internal static string SEC0001_MessageFormat {
             get {
                 return ResourceManager.GetString("SEC0001_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String can be compared with .IsBefore().
+        /// </summary>
+        internal static string SEC0011_AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("SEC0011_AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare(...) &lt; 0&quot; should be replaced with &quot;.IsBefore(...)&quot;..
+        /// </summary>
+        internal static string SEC0011_Description {
+            get {
+                return ResourceManager.GetString("SEC0011_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare({0}, {1}, {2}) &lt; 0&quot; can be replaced with &quot;{0}.IsBefore({1}, {2})&quot;..
+        /// </summary>
+        internal static string SEC0011_MessageFormat {
+            get {
+                return ResourceManager.GetString("SEC0011_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String can be compared with .IsBeforeOrEqualTo().
+        /// </summary>
+        internal static string SEC0012_AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("SEC0012_AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare(...) &lt;= 0&quot; should be replaced with &quot;.IsBeforeOrEqualTo(...)&quot;..
+        /// </summary>
+        internal static string SEC0012_Description {
+            get {
+                return ResourceManager.GetString("SEC0012_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare({0}, {1}, {2}) &lt;= 0&quot; can be replaced with &quot;{0}.IsBeforeOrEqualTo({1}, {2})&quot;..
+        /// </summary>
+        internal static string SEC0012_MessageFormat {
+            get {
+                return ResourceManager.GetString("SEC0012_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String can be compared with .IsAfterOrEqualTo().
+        /// </summary>
+        internal static string SEC0013_AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("SEC0013_AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare(...) &gt;= 0&quot; should be replaced with &quot;.IsAfterOrEqualTo(...)&quot;..
+        /// </summary>
+        internal static string SEC0013_Description {
+            get {
+                return ResourceManager.GetString("SEC0013_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare({0}, {1}, {2}) &gt;= 0&quot; can be replaced with &quot;{0}.IsAfterOrEqualTo({1}, {2})&quot;..
+        /// </summary>
+        internal static string SEC0013_MessageFormat {
+            get {
+                return ResourceManager.GetString("SEC0013_MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String can be compared with .IsAfter().
+        /// </summary>
+        internal static string SEC0014_AnalyzerTitle {
+            get {
+                return ResourceManager.GetString("SEC0014_AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare(...) &gt; 0&quot; should be replaced with &quot;.IsAfter(...)&quot;..
+        /// </summary>
+        internal static string SEC0014_Description {
+            get {
+                return ResourceManager.GetString("SEC0014_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;string.Compare({0}, {1}, {2}) &gt; 0&quot; can be replaced with &quot;{0}.IsAfter({1}, {2})&quot;..
+        /// </summary>
+        internal static string SEC0014_MessageFormat {
+            get {
+                return ResourceManager.GetString("SEC0014_MessageFormat", resourceCulture);
             }
         }
     }

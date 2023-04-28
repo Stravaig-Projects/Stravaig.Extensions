@@ -121,4 +121,16 @@
     <value>Replace with .HasContent()</value>
     <comment>The title of the code fix.</comment>
   </data>
+  <data name="SEC0011CodeFixTitle" xml:space="preserve">
+    <value>Replace with .IsBefore()</value>
+  </data>
+  <data name="SEC0012CodeFixTitle" xml:space="preserve">
+    <value>Replace with .IsBeforeOrEqualTo()</value>
+  </data>
+  <data name="SEC0013CodeFixTitle" xml:space="preserve">
+    <value>Replace with .IsAfterOrEqualTo()</value>
+  </data>
+  <data name="SEC0014CodeFixTitle" xml:space="preserve">
+    <value>Replace with .IsAfter()</value>
+  </data>
 </root>

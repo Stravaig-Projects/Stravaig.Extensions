@@ -18,3 +18,7 @@ string a = "A";
 string b = "B";
 bool result = a.IsBefore(b, StringComparison.OrdinalIgnoreCase); // true
 ```
+
+### See also
+
+* [Analyser SEC0011](../analysers/SEC0014_ReplaceStringCompareWithIsBefore.md)

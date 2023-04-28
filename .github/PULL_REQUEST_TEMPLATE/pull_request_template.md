@@ -29,6 +29,8 @@ If any of these items are not needed, then they can be removed.
 -->
 
 - [ ] I have updated the `readme.md` file & Documentation.
+  - [ ] Any code to be documented at ~/docs/v0.x
+  - [ ] Any analysers or code fixes to be documented at ~/src/Stravaig.Extensions.Core.Analyzer/docs/reference
 - [ ] I have bumped the version number in the `version.txt`.
 - [ ] I have added or updated any necessary tests.
 - [ ] I have ensured that any new code is covered by tests where reasonably possible.
