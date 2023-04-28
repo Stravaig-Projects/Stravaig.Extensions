@@ -5,8 +5,8 @@ using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace Stravaig.Extensions.Core.Analyzer;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(SEC0014_ReplaceStringCompareWithAfterAnalyzerCodeFix)), Shared]
-public class SEC0014_ReplaceStringCompareWithAfterAnalyzerCodeFix : SEC001x_ReplaceStringCompareAnalyzerCodeFixBase
+[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Sec0014ReplaceStringCompareWithAfterAnalyzerCodeFix)), Shared]
+public class Sec0014ReplaceStringCompareWithAfterAnalyzerCodeFix : Sec001XReplaceStringCompareAnalyzerCodeFixBase
 {
     private static readonly ImmutableArray<string> CachedFixableDiagnostics =
         ImmutableArray.Create(Sec001XReplaceStringCompareAnalyzer.AfterDiagnosticId);

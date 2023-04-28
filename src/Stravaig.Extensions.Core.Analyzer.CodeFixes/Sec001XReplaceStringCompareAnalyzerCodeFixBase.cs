@@ -9,7 +9,7 @@ using Stravaig.Extensions.Core.Analyzer.Extensions;
 
 namespace Stravaig.Extensions.Core.Analyzer;
 
-public abstract class SEC001x_ReplaceStringCompareAnalyzerCodeFixBase : CodeFixProvider
+public abstract class Sec001XReplaceStringCompareAnalyzerCodeFixBase : CodeFixProvider
 {
     protected abstract string Title { get; }
     protected abstract string ReplacementCall { get; }

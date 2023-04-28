@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using static Stravaig.Extensions.Core.Analyzer.Tests.CSharpCodeFixVerifier<
     Stravaig.Extensions.Core.Analyzer.Sec001XReplaceStringCompareAnalyzer,
-    Stravaig.Extensions.Core.Analyzer.SEC0012_ReplaceStringCompareWithBeforeOrEqualAnalyzerCodeFix>;
+    Stravaig.Extensions.Core.Analyzer.Sec0012ReplaceStringCompareWithBeforeOrEqualAnalyzerCodeFix>;
 
 namespace Stravaig.Extensions.Core.Analyzer.Tests.Sec0012;
 
