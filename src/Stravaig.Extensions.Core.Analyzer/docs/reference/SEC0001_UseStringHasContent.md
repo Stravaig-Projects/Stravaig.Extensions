@@ -17,7 +17,7 @@ Replace `!string.IsNullOrWhiteSpace(aString)` or `string.IsNullOrWhiteSpace(aStr
 
 ## When to suppress warnings
 
-If you prefer the orginal style of string check.
+If you prefer the original style of string check.
 
 ## Example of a violation
 

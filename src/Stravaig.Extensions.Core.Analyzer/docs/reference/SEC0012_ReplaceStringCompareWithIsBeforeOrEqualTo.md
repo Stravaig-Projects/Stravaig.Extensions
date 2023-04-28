@@ -15,7 +15,7 @@ Replace `string.Compare(a, b, comparison) <= 0` with `a.IsBeforeOrEqualTo(b, com
 
 ## When to suppress warnings
 
-If you prefer the orginal style of string check.
+If you prefer the original style of string check.
 
 ## Example of a violation
 
@@ -29,6 +29,6 @@ if (string.Compare(a, b, StringComparison.OrdinalIgnoreCase) <= 0)
 
 ## Related rules
 
-* [SEC0011: String can be compared with .IsBefore()](SEC0011_ReplaceStringCompareWithIsBeforeAnalyzer.md)
-* [SEC0013: String can be compared with .IsAfterOrEqualTo()](SEC0013_ReplaceStringCompareWithIsAfterOrEqualToAnalyzer.md)
-* [SEC0014: String can be compared with .IsAfter()](SEC0014_ReplaceStringCompareWithIsAfterAnalyzer.md)
+* [SEC0011: String can be compared with .IsBefore()](SEC0011_ReplaceStringCompareWithIsBefore.md)
+* [SEC0013: String can be compared with .IsAfterOrEqualTo()](SEC0013_ReplaceStringCompareWithIsAfterOrEqualTo.md)
+* [SEC0014: String can be compared with .IsAfter()](SEC0014_ReplaceStringCompareWithIsAfter.md)

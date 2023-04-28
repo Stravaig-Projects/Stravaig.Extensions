@@ -18,3 +18,7 @@ string a = "A";
 string b = "B";
 bool result = b.IsAfterOrEqualTo(a, StringComparison.OrdinalIgnoreCase); // true
 ```
+
+### See also
+
+* [Analyser SEC0013](../analysers/SEC0014_ReplaceStringCompareWithIsAfterOrEqualTo.md)

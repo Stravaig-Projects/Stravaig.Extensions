@@ -16,3 +16,7 @@ var aString = "I have content";
 bool hasContent = aString.HasContent(); // true
 });
 ```
+
+### See also
+
+* [Analyser SEC0001](../analysers/SEC0001_UseStringHasContent.md)
