@@ -1,10 +1,11 @@
 {
     "cSpell.words": [
+        "Analyzer",
         "Dependabot",
-        "Stravaig",
         "nuget",
         "nupkg",
         "pwsh",
-        "snupkg"
+        "snupkg",
+        "Stravaig"
     ]
 }
