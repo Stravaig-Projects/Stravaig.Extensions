@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "en" }}">
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +23,7 @@
           <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
           <a href="{{ site.nuget.url }}" class="btn btn-nuget"><span class="icon"></span>View on NuGet</a>
         </section>
+        <small>Documentation last built on {{ site.time | date: '%A, %e %B, %Y' }}</small>
       </div>
     </header>
 
