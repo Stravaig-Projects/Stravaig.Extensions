@@ -30,8 +30,8 @@ If any of these items are not needed, then they can be removed.
 
 - [ ] I have update the docs
   - [ ] I have updated the `readme.md` file & Documentation.
-  - [ ] I have updated any necessary documents at ~/docs/v0.x
-  - [ ] I have updated any analysers or code fixes at ~/src/Stravaig.Extensions.Core.Analyzer/docs/reference
+  - [ ] I have updated any necessary documents at `~/docs/v0.x`
+  - [ ] I have updated any analysers or code fixes at `~/src/Stravaig.Extensions.Core.Analyzer/docs/reference`
 - [ ] I have bumped the version number in the `version.txt`.
 - [ ] I have added or updated any necessary tests.
 - [ ] I have ensured that any new code is covered by tests where reasonably possible.
